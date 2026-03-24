@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benefits Program Crosswalk — NextLadder Ventures</title>
+<style>
+:root{
+--nlv-white:#FFF8EF;--nlv-black:#190501;--nlv-grey:#D4C8BF;--nlv-brown:#6E2B21;
+--nlv-violet:#C2A0F1;--nlv-blue:#85DEFF;--nlv-green:#BDE998;--nlv-orange:#FFA560;--nlv-yellow:#FFE284;
+--nlv-font-body:"Inter","Helvetica Neue",Arial,sans-serif;
+--nlv-font-display:"Courier New","Courier",monospace;
+--nlv-font-mono:"JetBrains Mono","Fira Code","Courier New",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--nlv-font-body);background:var(--nlv-white);color:var(--nlv-black);padding:2rem;max-width:960px;margin:0 auto}
+h1{font-family:var(--nlv-font-display);font-size:28px;font-weight:400;color:var(--nlv-brown);margin-bottom:4px}
+.subtitle{font-size:14px;color:#888;margin-bottom:8px}
+.branding{font-family:var(--nlv-font-mono);font-size:11px;color:var(--nlv-brown);letter-spacing:1px;text-transform:uppercase;margin-bottom:24px;padding-bottom:12px;border-bottom:2px solid var(--nlv-brown)}
+.desc{font-size:14px;color:#666;line-height:1.6;margin-bottom:28px}
+
+/* Benefit selector grid */
+.section-label{font-family:var(--nlv-font-mono);font-size:11px;color:var(--nlv-brown);letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px}
+.benefit-grid{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:28px}
+.ben{
+  font-family:var(--nlv-font-mono);font-size:12px;
+  padding:9px 16px;border-radius:20px;
+  border:1.5px solid var(--nlv-grey);
+  background:#fff;color:#777;cursor:pointer;
+  transition:all .25s;user-select:none;
+}
+.ben:hover{border-color:#aaa;color:var(--nlv-black);background:#faf6ef}
+.ben.sel{border-color:var(--nlv-brown);background:var(--nlv-brown);color:var(--nlv-white);box-shadow:0 2px 8px rgba(110,43,33,.18)}
+.ben .ben-type{font-size:9px;text-transform:uppercase;letter-spacing:.5px;opacity:.6;display:block;margin-bottom:2px}
+.ben.sel .ben-type{opacity:.8}
+
+/* Detail panel */
+.detail{display:none;margin-bottom:28px;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.detail.show{display:block}
+.detail-header{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.detail-name{font-family:var(--nlv-font-display);font-size:22px;font-weight:400;color:var(--nlv-brown)}
+.detail-type{font-family:var(--nlv-font-mono);font-size:10px;color:#999;text-transform:uppercase;letter-spacing:.5px;padding:3px 10px;border-radius:10px;background:#f0ebe4}
+.detail-desc{font-size:13px;color:#888;line-height:1.5;margin-bottom:16px}
+
+/* Stats row */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.stat{background:#f0ebe4;border-radius:8px;padding:12px 14px}
+.stat .sl{font-family:var(--nlv-font-mono);font-size:10px;color:#999;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+.stat .sv{font-size:15px;font-weight:600;color:var(--nlv-black)}
+
+/* Journey list */
+.journey-list{display:flex;flex-direction:column;gap:6px;margin-bottom:20px}
+.jrow{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 14px;border-radius:8px;
+  border:1px solid var(--nlv-grey);background:#fff;
+  transition:all .25s;cursor:default;
+}
+.jrow.active{border-color:transparent;background:linear-gradient(135deg,#f9f5ef 0%,#f0ebe4 100%);box-shadow:0 1px 4px rgba(25,5,1,.06)}
+.jrow.inactive{opacity:.35}
+.jdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.jname{font-size:14px;font-weight:600;color:var(--nlv-black);flex:1;min-width:0}
+.jrow.inactive .jname{font-weight:400;color:#aaa}
+.jtrigger{font-size:11px;color:#999;flex-shrink:0;text-align:right;max-width:220px}
+.jstages{display:flex;gap:3px;flex-shrink:0}
+.jstage{width:14px;height:14px;border-radius:3px;background:#e8e2da}
+.jstage.on{background:var(--nlv-green)}
+.jstage.drop{background:#fce4e0;border:1.5px solid #d85a30}
+.jdrop-note{font-size:11px;color:#c0542a;margin-top:2px;padding-left:20px;line-height:1.4}
+
+/* Stage legend */
+.stage-legend{display:flex;gap:3px;margin-bottom:16px;align-items:center}
+.stage-legend .sl-label{font-family:var(--nlv-font-mono);font-size:10px;color:#999;text-transform:uppercase;letter-spacing:.5px;margin-right:6px}
+.stage-legend .sl-item{font-size:10px;color:#aaa;padding:3px 8px;border-radius:4px;background:#f0ebe4;text-align:center;flex:1;max-width:100px}
+
+/* Thesis connection */
+.thesis{margin-top:20px;padding:16px;border:1px dashed var(--nlv-grey);border-radius:8px}
+.thesis .tl{font-family:var(--nlv-font-mono);font-size:11px;color:var(--nlv-brown);letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px}
+.thesis .tp{font-size:13px;color:#666;line-height:1.6}
+
+.note{font-size:12px;color:#aaa;margin-top:24px;line-height:1.5;font-style:italic;border-top:1px solid var(--nlv-grey);padding-top:16px}
+.footer{margin-top:24px;padding-top:12px;border-top:1px solid var(--nlv-grey);font-family:var(--nlv-font-mono);font-size:10px;color:#bbb;display:flex;justify-content:space-between}
+</style>
+</head>
+<body>
+<div class="branding">NextLadder Ventures — Economic Mobility Journey Framework</div>
+<h1>Benefits program crosswalk</h1>
+<p class="subtitle">Which journeys activate each benefit — the inverse view of the journey matrix</p>
+<p class="desc">Click a benefit program below to see which life-event journeys involve that benefit, where each journey's biggest drop-off occurs, and how it connects to NLV's investment thesis.</p>
+
+<div class="section-label">Primary benefit programs</div>
+<div class="benefit-grid" id="benefitGrid"></div>
+
+<div class="detail" id="detail">
+  <div class="detail-header">
+    <div class="detail-name" id="dName">—</div>
+    <div class="detail-type" id="dType">—</div>
+  </div>
+  <div class="detail-desc" id="dDesc">—</div>
+
+  <div class="stats">
+    <div class="stat"><div class="sl">Journeys activated</div><div class="sv" id="dCount">—</div></div>
+    <div class="stat"><div class="sl">Participation gap</div><div class="sv" id="dGap">—</div></div>
+    <div class="stat"><div class="sl">Unclaimed annually</div><div class="sv" id="dUnclaimed">—</div></div>
+  </div>
+
+  <div class="section-label">Stage legend</div>
+  <div class="stage-legend">
+    <span class="sl-item">Discovery</span>
+    <span class="sl-item">Eligibility</span>
+    <span class="sl-item">Application</span>
+    <span class="sl-item">Processing</span>
+    <span class="sl-item">Enrollment</span>
+    <span class="sl-item">Maintenance</span>
+  </div>
+
+  <div class="section-label">Journeys involving this benefit</div>
+  <div class="journey-list" id="journeyList"></div>
+
+  <div class="thesis">
+    <div class="tl">NLV thesis connection</div>
+    <div class="tp" id="dThesis">—</div>
+  </div>
+</div>
+
+<p class="note">This visualization inverts the Benefits Access Journey Matrix. Where the journey matrix asks "what happens when someone loses a job?", this crosswalk asks "where does SNAP show up across all life events?" Benefits are not siloed — they appear across multiple journeys, which is why the shared infrastructure layer (rules engines, application AI, navigator tools) is the highest-leverage investment surface. A single improvement to SNAP application assistance, for example, impacts 5 of 8 journeys simultaneously.</p>
+
+<div class="footer">
+<span>Source: NLV Benefits Access Market Exploration (2026) | Mobility Experiences Research (Camber Collective, 2024)</span>
+<span>Draft — March 2026</span>
+</div>
+
+<script>
+// Journey data (same source as journey matrix)
+const journeys=[
+{name:"Benefits after job loss",trigger:"Unexpected unemployment",color:"#993C1D",stages:[1,1,1,1,1,0],drop:2,dropText:"Application — complexity during crisis",benefits:["UI","SNAP","Medicaid","COBRA/ACA"]},
+{name:"Benefits for new parents",trigger:"Pregnancy or birth of child",color:"#993556",stages:[1,1,1,1,1,1],drop:0,dropText:"Discovery — unknown program set",benefits:["WIC","Medicaid","PFML","CTC","SNAP","Childcare subsidy"]},
+{name:"Benefits for disability / chronic illness",trigger:"New disability or chronic condition",color:"#534AB7",stages:[1,1,1,1,1,1],drop:3,dropText:"Processing — months-to-years SSDI approval",benefits:["SSDI","SSI","Medicaid","SNAP"]},
+{name:"Benefits during housing crisis",trigger:"Eviction, rent shock, or housing loss",color:"#185FA5",stages:[1,1,1,1,1,0],drop:1,dropText:"Eligibility — fragmented rules across jurisdictions",benefits:["Emergency rental assistance","Housing vouchers","SNAP","Utility aid"]},
+{name:"Benefits after incarceration",trigger:"Release from incarceration",color:"#D85A30",stages:[1,1,1,1,1,1],drop:1,dropText:"Eligibility — felony restrictions vary by state",benefits:["SNAP","Medicaid","Emergency assistance"]},
+{name:"Cross-enrollment & optimization",trigger:"Already enrolled in one program",color:"#0F6E56",stages:[1,1,1,0,1,0],drop:0,dropText:"Discovery — 74% have civil legal problem, 92% inadequate help",benefits:["SNAP","Medicaid","WIC","EITC","CTC","SSDI","SSI","Housing vouchers","Utility aid","PFML","Childcare subsidy","UI"]},
+{name:"Benefits maintenance & retention",trigger:"Approaching renewal deadline",color:"#888780",stages:[0,0,0,1,0,1],drop:5,dropText:"Maintenance — majority of CA SNAP exits are still-eligible",benefits:["SNAP","Medicaid","WIC","SSDI","SSI","Housing vouchers","UI","EITC","CTC"]},
+{name:"Tax credit access for working families",trigger:"End of tax year / filing season",color:"#BA7517",stages:[1,1,1,0,1,0],drop:2,dropText:"Application — VITA capacity limited",benefits:["EITC","CTC","State-level credits"]}
+];
+
+// Benefit program metadata
+const benefits={
+"SNAP":{type:"Federal",desc:"Supplemental Nutrition Assistance Program — the nation's largest anti-hunger program, serving ~42M Americans monthly.",gap:"~12% eligible non-participants (~6.5M people)",unclaimed:"~$10B+",thesis:"SNAP is the highest-volume benefit in NLV's thesis. It appears in 5 of 8 journeys as a primary benefit and in 2 more via cross-enrollment and retention. The team's investment ideas target SNAP specifically: AI-powered application assistance at <$20/applicant, consent-based income verification to reduce the 62% of errors from administrative mistakes, and recertification nudge tools to stem churn. HR1's new work requirements and cost-sharing provisions (FY2026) add urgency."},
+"Medicaid":{type:"Federal/State",desc:"Health coverage for low-income individuals — the largest source of health insurance in the U.S., covering ~90M people.",gap:"~6M eligible but unenrolled",unclaimed:"~$15B+",thesis:"Medicaid spans 4 journeys directly and is the anchor for the healthcare payor thesis (Lane 1). MCOs have strong incentives to enroll eligible members to prevent revenue loss from administrative churn. The SDOH market — where Medicaid dollars fund food, housing, and transportation via Section 1115 waivers — is a key emerging payor category. California's CalAIM and New York's $7.5B HRSN waiver are the leading examples."},
+"WIC":{type:"Federal",desc:"Special Supplemental Nutrition Program for Women, Infants, and Children — serves pregnant/postpartum women and children under 5.",gap:"~49% of eligible not participating (~5M people)",unclaimed:"~$5B+",thesis:"WIC has the largest participation gap among priority benefits. Discovery is the primary barrier — new parents often don't know the full program set available. Only 3 states allow WIC applications alongside other federal benefits, highlighting the cross-enrollment infrastructure gap. OB/GYN and community health worker channels are key discovery touchpoints."},
+"UI":{type:"Federal/State",desc:"Unemployment Insurance — provides temporary income to workers who lose jobs through no fault of their own.",gap:"Varies by state; ~25-30% of eligible don't file",unclaimed:"~$8B+",thesis:"UI is the first benefit triggered by job loss and connects directly to the 'avoiding involuntary unemployment' mobility experience (19% mean impact — the highest among career progression experiences). NLV's GovTech Lane 3 investments target UI system modernization; Exygy's Arkansas UI front-end is a current example."},
+"EITC":{type:"Federal tax credit",desc:"Earned Income Tax Credit — the largest anti-poverty program for working families, worth up to $7,430 per year.",gap:"~5M eligible taxpayers don't claim",unclaimed:"~$7B",thesis:"EITC access is embedded in the tax filing process, making it structurally different from other benefits. VITA volunteer capacity is the bottleneck. The tax season journey has a unique annual cadence. Fintech tools and AI-assisted filing represent the primary NavTech opportunity. The 8% financial inclusion mobility experience is the direct link."},
+"CTC":{type:"Federal tax credit",desc:"Child Tax Credit — up to $2,000 per qualifying child, partially refundable for low-income families.",gap:"Millions of non-filing eligible families",unclaimed:"~$5B+",thesis:"CTC intersects with both the new parent and tax season journeys. Non-filing families are the hardest to reach because they sit outside the tax system entirely. Cross-enrollment from SNAP or Medicaid is a key discovery channel. The expanded CTC during COVID demonstrated the program's poverty-reduction power."},
+"SSDI":{type:"Federal",desc:"Social Security Disability Insurance — income support for workers who become disabled. Notoriously difficult approval process.",gap:"~30% initial approval rate; 2M+ pending claims",unclaimed:"~$12B+",thesis:"SSDI represents the most complex application journey in the benefits landscape. Processing takes months to years, and the appeals market (contingency advocates earning up to $9,200 per case) reveals both the cost structure and the perverse incentives. NLV's thesis targets AI-powered medical records gathering and navigator throughput tools to reduce cost while increasing approval rates. Benny and Mindset Care are portfolio-relevant."},
+"SSI":{type:"Federal",desc:"Supplemental Security Income — means-tested income for aged, blind, or disabled individuals with limited resources. ~5M recipients.",gap:"~50% uptake among eligible",unclaimed:"~$8B+",thesis:"SSI has one of the worst participation rates of any federal program, driven by asset tests, complex eligibility rules, and stigma. It intersects with disability and aging journeys. The 50% uptake gap represents a significant discovery and application assistance opportunity."},
+"PFML":{type:"State",desc:"Paid Family & Medical Leave — state-run programs providing wage replacement during family or medical leave. Available in 13+ states.",gap:"Highly fragmented; many eligible don't know it exists",unclaimed:"Varies by state",thesis:"PFML is a state-level benefit with high fragmentation — each state has different eligibility, duration, and wage replacement rules. The new parent journey is the primary activation point. NLV sees opportunity in employer-facing HR tools that make PFML more accessible, and in navigator tools that surface state-specific rules. The career progression Journey 7 (employer benefits) is the cross-domain link."},
+"Housing vouchers":{type:"Federal/Local",desc:"Section 8 and emergency housing vouchers — rental subsidies administered by local public housing authorities.",gap:"~75% of eligible don't receive (supply-constrained)",unclaimed:"Supply-limited, not unclaimed",thesis:"Housing vouchers are unique because the participation gap is supply-driven, not friction-driven — there are far more eligible households than vouchers. The housing crisis journey's eligibility drop-off reflects fragmented rules across 3,300+ local PHAs. Post-incarceration housing access is further constrained by criminal record restrictions. The 8% stable housing mobility experience is the direct link."},
+"Emergency rental assistance":{type:"Federal/State/Local",desc:"Short-term rent and utility payments to prevent eviction — expanded dramatically during COVID via ERA programs.",gap:"Program availability varies; funds often exhaust quickly",unclaimed:"Episodic — depends on funding cycles",thesis:"Emergency rental assistance is crisis-driven and time-sensitive. The housing crisis journey's eligibility drop-off is acute here — programs have different rules across jurisdictions, funding runs out unpredictably, and 211 networks are the primary discovery channel. HUD-certified housing counselors and legal aid are the key navigators."},
+"Utility aid":{type:"Federal/State/Local",desc:"LIHEAP and local utility assistance — helps low-income households pay heating, cooling, and energy bills.",gap:"Only ~20% of eligible households receive LIHEAP",unclaimed:"~$3B+",thesis:"Utility aid has strategic synergy with other benefits in NLV's framework. It's often discovered through cross-enrollment when someone applies for SNAP or emergency rental assistance. The 80% non-participation rate signals a massive discovery gap. Utility companies themselves are emerging as potential payors for enrollment assistance."},
+"COBRA/ACA":{type:"Federal",desc:"Continuation of employer health coverage (COBRA) or Affordable Care Act marketplace plans after job loss.",gap:"Many eligible don't enroll in time (60-day COBRA window)",unclaimed:"Difficult to quantify",thesis:"COBRA/ACA is uniquely time-sensitive — the 60-day COBRA election window and ACA special enrollment periods create hard deadlines during a crisis moment. The job loss journey's application drop-off partly reflects this time pressure. ACA Navigators funded by CMS are an existing navigator channel, though they focus primarily on Marketplace plans rather than full benefits navigation."},
+"Emergency assistance":{type:"Federal/State/Local/Community",desc:"General emergency aid — cash assistance, food pantry referrals, and crisis services for immediate needs post-release.",gap:"Fragmented; varies by locality",unclaimed:"Difficult to quantify",thesis:"Emergency assistance for post-incarceration is the most fragmented category. Eligibility varies enormously by state — 20+ states still restrict SNAP for drug felonies. Reentry case managers and parole officers are the primary navigators, and the 10% CJ mobility experience is the link. The shared infrastructure layer (resource directories, closed-loop referrals) is critical here."},
+"Childcare subsidy":{type:"Federal/State",desc:"Child Care and Development Fund (CCDF) subsidies — help low-income families afford childcare so parents can work or attend training.",gap:"Only ~15% of eligible children receive subsidies",unclaimed:"~$10B+",thesis:"Childcare subsidy has one of the worst participation rates in the safety net — only about 1 in 7 eligible children receives help. The new parent journey is the primary entry point. Childcare costs consume ~35% of income for families like Maria (the NLV persona). Discovery is again the barrier: many parents don't know subsidies exist or assume they earn too much."},
+"State-level credits":{type:"State",desc:"State-level earned income and child tax credits — available in 30+ states, varying in size and eligibility rules.",gap:"Mirrors federal EITC gap; less awareness",unclaimed:"~$2B+ across states",thesis:"State credits piggyback on the federal tax filing process but add complexity because eligibility and amounts vary by state. They appear exclusively in the tax season journey. The VITA capacity bottleneck applies here as well. Fintech tools that auto-identify state credits during filing are the primary NavTech opportunity."}
+};
+
+const stageNames=["Discovery","Eligibility","Application","Processing","Enrollment","Maintenance"];
+
+// Build benefit pills
+const grid=document.getElementById("benefitGrid");
+const allBenefitNames=Object.keys(benefits);
+let selected=null;
+
+allBenefitNames.forEach(name=>{
+  const b=benefits[name];
+  const el=document.createElement("div");
+  el.className="ben";
+  el.innerHTML=`<span class="ben-type">${b.type}</span>${name}`;
+  el.onclick=()=>selectBenefit(name,el);
+  grid.appendChild(el);
+});
+
+function selectBenefit(name,el){
+  // Toggle
+  if(selected===name){selected=null;document.querySelectorAll(".ben").forEach(b=>b.classList.remove("sel"));document.getElementById("detail").classList.remove("show");return}
+  selected=name;
+  document.querySelectorAll(".ben").forEach(b=>b.classList.remove("sel"));
+  el.classList.add("sel");
+
+  const b=benefits[name];
+  document.getElementById("dName").textContent=name;
+  document.getElementById("dType").textContent=b.type;
+  document.getElementById("dDesc").textContent=b.desc;
+  document.getElementById("dGap").textContent=b.gap;
+  document.getElementById("dUnclaimed").textContent=b.unclaimed;
+  document.getElementById("dThesis").textContent=b.thesis;
+
+  // Find which journeys include this benefit
+  const matchedIdx=[];
+  journeys.forEach((j,i)=>{
+    if(j.benefits.includes(name))matchedIdx.push(i);
+  });
+  document.getElementById("dCount").textContent=matchedIdx.length+" of "+journeys.length;
+
+  // Render journey rows
+  const list=document.getElementById("journeyList");
+  list.innerHTML="";
+  journeys.forEach((j,i)=>{
+    const isActive=matchedIdx.includes(i);
+    const row=document.createElement("div");
+    row.className="jrow "+(isActive?"active":"inactive");
+
+    // Stage mini-blocks
+    let stageHTML='<div class="jstages" title="'+stageNames.join(" → ")+'">';
+    j.stages.forEach((s,si)=>{
+      let cls="jstage";
+      if(isActive&&s)cls+=" on";
+      if(isActive&&si===j.drop)cls+=" drop";
+      stageHTML+=`<div class="${cls}"></div>`;
+    });
+    stageHTML+="</div>";
+
+    row.innerHTML=`<div class="jdot" style="background:${j.color}"></div><div class="jname">${j.name}</div><div class="jtrigger">${j.trigger}</div>${stageHTML}`;
+
+    if(isActive){
+      const dropNote=document.createElement("div");
+      dropNote.className="jdrop-note";
+      dropNote.textContent="⚠ Drop-off: "+j.dropText;
+      const wrapper=document.createElement("div");
+      wrapper.style.width="100%";
+      wrapper.appendChild(row);
+      wrapper.appendChild(dropNote);
+      list.appendChild(wrapper);
+    } else {
+      list.appendChild(row);
+    }
+  });
+
+  document.getElementById("detail").classList.add("show");
+  document.getElementById("detail").scrollIntoView({behavior:"smooth",block:"start"});
+}
+</script>
+</body>
+</html>

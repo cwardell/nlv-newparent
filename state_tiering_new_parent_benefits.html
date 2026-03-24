@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>State Policy Landscape — New Parent Benefits Journey — NextLadder Ventures</title>
+<style>
+:root{
+--nlv-white:#FFF8EF;--nlv-black:#190501;--nlv-grey:#D4C8BF;--nlv-brown:#6E2B21;
+--nlv-violet:#C2A0F1;--nlv-blue:#85DEFF;--nlv-green:#BDE998;--nlv-orange:#FFA560;--nlv-yellow:#FFE284;
+--nlv-font-body:"Inter","Helvetica Neue",Arial,sans-serif;
+--nlv-font-display:"Courier New","Courier",monospace;
+--nlv-font-mono:"JetBrains Mono","Fira Code","Courier New",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--nlv-font-body);background:var(--nlv-white);color:var(--nlv-black);padding:2rem;max-width:1100px;margin:0 auto}
+.branding{font-family:var(--nlv-font-mono);font-size:11px;color:var(--nlv-brown);letter-spacing:1px;text-transform:uppercase;margin-bottom:24px;padding-bottom:12px;border-bottom:2px solid var(--nlv-brown)}
+h1{font-family:var(--nlv-font-display);font-size:26px;font-weight:400;color:var(--nlv-brown);margin-bottom:4px}
+.subtitle{font-size:14px;color:#888;margin-bottom:8px}
+.desc{font-size:13px;color:#666;line-height:1.6;margin-bottom:24px}
+.section-label{font-family:var(--nlv-font-mono);font-size:11px;color:var(--nlv-brown);letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px;margin-top:24px}
+
+/* Dimension legend */
+.dim-legend{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px}
+.dim-pill{font-family:var(--nlv-font-mono);font-size:10px;padding:5px 12px;border-radius:14px;border:1px solid var(--nlv-grey);color:#888;cursor:help;position:relative}
+.dim-pill .dim-tip{display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);width:280px;background:var(--nlv-black);color:var(--nlv-white);font-family:var(--nlv-font-body);font-size:11px;line-height:1.5;padding:12px;border-radius:8px;z-index:20;pointer-events:none}
+.dim-pill:hover .dim-tip{display:block}
+
+/* Tier cards */
+.tier{margin-bottom:24px;border:1px solid var(--nlv-grey);border-radius:12px;overflow:hidden}
+.tier-header{display:flex;align-items:center;gap:12px;padding:16px 20px;cursor:pointer;transition:background .2s}
+.tier-header:hover{background:rgba(0,0,0,.02)}
+.tier-num{font-family:var(--nlv-font-display);font-size:28px;font-weight:400;line-height:1}
+.tier-meta{flex:1}
+.tier-title{font-size:15px;font-weight:600;color:var(--nlv-black)}
+.tier-sub{font-size:12px;color:#999;margin-top:2px}
+.tier-count{font-family:var(--nlv-font-mono);font-size:11px;color:#999;background:#f0ebe4;padding:4px 12px;border-radius:10px;white-space:nowrap}
+.tier-arrow{font-size:18px;color:#bbb;transition:transform .25s}
+.tier.open .tier-arrow{transform:rotate(90deg)}
+
+.tier-1 .tier-header{background:#e8f5e2;border-bottom:1px solid #c8ddb8}
+.tier-1 .tier-num{color:#2a5a1a}
+.tier-2 .tier-header{background:#e8f0fa;border-bottom:1px solid #c0d4ea}
+.tier-2 .tier-num{color:#185FA5}
+.tier-3 .tier-header{background:#f8f4fd;border-bottom:1px solid #ddd0f0}
+.tier-3 .tier-num{color:#534AB7}
+.tier-4 .tier-header{background:#fce8e2;border-bottom:1px solid #f0c8ba}
+.tier-4 .tier-num{color:#993C1D}
+
+.tier-body{display:none;padding:20px}
+.tier.open .tier-body{display:block}
+
+/* Tier description */
+.tier-desc{font-size:13px;color:#666;line-height:1.6;margin-bottom:16px}
+
+/* State grid inside tier */
+.state-grid{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.state-chip{padding:8px 14px;border-radius:8px;background:#fff;border:1px solid var(--nlv-grey);cursor:pointer;transition:all .2s;position:relative}
+.state-chip:hover{border-color:#aaa;transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.state-chip.sel{border-color:var(--nlv-brown);box-shadow:0 2px 12px rgba(110,43,33,.12)}
+.state-chip .sc-name{font-size:13px;font-weight:600;color:var(--nlv-black)}
+.state-chip .sc-abbr{font-family:var(--nlv-font-mono);font-size:10px;color:#bbb;margin-left:4px}
+.state-chip.highlight{border-color:var(--nlv-brown);border-width:2px;background:#fdf8f4}
+.state-chip.highlight .sc-name{color:var(--nlv-brown)}
+
+/* Dimension dots on state chips */
+.sc-dims{display:flex;gap:3px;margin-top:4px}
+.sc-dim{width:8px;height:8px;border-radius:50%}
+.sc-dim.yes{background:var(--nlv-green)}
+.sc-dim.no{background:#e8e2da}
+.sc-dim.partial{background:var(--nlv-yellow)}
+
+/* State detail */
+.state-detail{display:none;background:#fff;border:1px solid var(--nlv-grey);border-radius:10px;padding:16px 20px;margin-top:12px;animation:fadeUp .25s ease}
+.state-detail.show{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.sd-header{display:flex;align-items:baseline;gap:10px;margin-bottom:12px}
+.sd-name{font-family:var(--nlv-font-display);font-size:18px;font-weight:400;color:var(--nlv-brown)}
+.sd-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px}
+.sd-item{padding:10px 12px;border-radius:6px;font-size:12px;line-height:1.4}
+.sd-item .sdi-label{font-family:var(--nlv-font-mono);font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:#999;margin-bottom:3px}
+.sd-item .sdi-val{font-weight:600;color:var(--nlv-black)}
+.sd-item.yes{background:#e8f5e2}.sd-item.yes .sdi-val{color:#2a5a1a}
+.sd-item.no{background:#fce8e2}.sd-item.no .sdi-val{color:#993C1D}
+.sd-item.partial{background:#fef8e6}.sd-item.partial .sdi-val{color:#8a6d0b}
+.sd-item.info{background:#f0ebe4}
+.sd-note{font-size:12px;color:#888;line-height:1.5;margin-top:8px}
+
+/* Strategic implication box */
+.strategy{background:var(--nlv-brown);color:var(--nlv-white);border-radius:10px;padding:20px;margin-top:28px;margin-bottom:20px}
+.strategy .str-label{font-family:var(--nlv-font-mono);font-size:10px;text-transform:uppercase;letter-spacing:1px;opacity:.6;margin-bottom:8px}
+.strategy p{font-size:14px;line-height:1.7;margin-bottom:12px}
+.strategy p:last-child{margin-bottom:0}
+.strategy strong{color:var(--nlv-yellow)}
+
+.note{font-size:12px;color:#aaa;margin-top:20px;line-height:1.5;font-style:italic;border-top:1px solid var(--nlv-grey);padding-top:16px}
+.footer{margin-top:24px;padding-top:12px;border-top:1px solid var(--nlv-grey);font-family:var(--nlv-font-mono);font-size:10px;color:#bbb;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+</style>
+</head>
+<body>
+<div class="branding">NextLadder Ventures — New Parent Benefits Journey</div>
+<h1>State policy landscape</h1>
+<p class="subtitle">Which states make it easiest — and hardest — to close the new parent benefits gap?</p>
+<p class="desc">Six policy dimensions determine how much of the $28K+ benefit bundle is accessible in a given state, and how viable it is to build a business serving new parents there. States are tiered by the combination of these dimensions. Click any state to see its specific policy profile. <strong>Highlighted states</strong> represent recommended launch markets.</p>
+
+<div class="section-label">Policy dimensions (hover for detail)</div>
+<div class="dim-legend">
+<div class="dim-pill">
+  <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--nlv-green);vertical-align:middle;margin-right:4px"></span>Medicaid expansion
+  <div class="dim-tip">Whether the state has expanded Medicaid to 138% FPL for all adults. Non-expansion states have extremely low income thresholds for non-pregnant adults (median ~38% FPL), creating a coverage cliff postpartum.</div>
+</div>
+<div class="dim-pill">
+  <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--nlv-green);vertical-align:middle;margin-right:4px"></span>12-mo postpartum
+  <div class="dim-tip">Whether the state has adopted the permanent option to extend Medicaid postpartum coverage from 60 days to 12 months. 49 states + DC have adopted; only Arkansas has not.</div>
+</div>
+<div class="dim-pill">
+  <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--nlv-green);vertical-align:middle;margin-right:4px"></span>State PFML
+  <div class="dim-tip">Whether the state has a mandatory Paid Family Medical Leave program paying benefits. 13 states + DC have or will soon have programs. In ~36 states without PFML, new parents get zero income replacement during leave.</div>
+</div>
+<div class="dim-pill">
+  <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--nlv-green);vertical-align:middle;margin-right:4px"></span>SDOH / HRSN waiver
+  <div class="dim-tip">Whether the state has a Section 1115 waiver allowing Medicaid to pay for social-needs services (housing, food, navigation) through MCOs. This is the payor mechanism that funds the navigator workforce and creates a market for NavTech products.</div>
+</div>
+<div class="dim-pill">
+  <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--nlv-green);vertical-align:middle;margin-right:4px"></span>MCO penetration
+  <div class="dim-tip">Whether the state delivers Medicaid primarily through managed care organizations (who have capitation-based financial incentive to keep members enrolled) vs. fee-for-service.</div>
+</div>
+<div class="dim-pill">
+  <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--nlv-green);vertical-align:middle;margin-right:4px"></span>State EITC/credits
+  <div class="dim-tip">Whether the state has its own earned income tax credit or child tax credit, adding to the federal EITC/CTC. ~30+ states have some form of state credit. Increases the total bundle value and the ROI case for a screening tool.</div>
+</div>
+</div>
+
+<div id="tiers"></div>
+
+<div class="strategy">
+<div class="str-label">Strategic implication</div>
+<p><strong>Launch in Tier 1</strong> — California or New York — where the full bundle is available, the MCO payor channel is established through SDOH waivers, and the infrastructure exists to sell a benefits screening tool to an institutional buyer. A startup should prove its model in one of these states before expanding.</p>
+<p><strong>Expand to Tier 2</strong> as those states build out SDOH infrastructure. North Carolina, Illinois, and Michigan are the highest-volume Tier 2 markets. Virginia and Pennsylvania may move to Tier 1 if PFML legislation passes.</p>
+<p><strong>Tier 3 and 4 represent the highest need but the hardest business environment.</strong> Texas alone accounts for 42% of the national Medicaid coverage gap. Maria, NLV's primary persona, lives in Houston. Serving these states may require a different model — grantmaking, government contracts, or federal-level solutions — rather than the MCO-sold SaaS that works in Tier 1. The irony is that the states where the gap is largest are the ones where the business infrastructure to close it doesn't yet exist.</p>
+</div>
+
+<p class="note">Tiering is based on six policy dimensions as of March 2026. State positions can change — PFML legislation is active in several Tier 2 states (Virginia, Pennsylvania), and federal HR1 provisions (Medicaid work requirements beginning 2027) will affect all tiers. SDOH/HRSN waiver status reflects approved and actively operating programs; several additional states have pending or early-stage waivers not reflected here. MCO penetration is characterized as high (>60% of Medicaid beneficiaries in managed care), moderate (30–60%), or low (<30%). Medicaid-covered birth volumes are approximate based on NCHS 2024 data and state Medicaid share of births. "Recommended launch" highlights are based on the combination of policy environment, payor infrastructure, birth volume, and market readiness — not solely on need.</p>
+
+<div class="footer">
+<span>Sources: KFF Medicaid Postpartum Tracker (2026) | KFF Medicaid Expansion Status | New America Paid Leave (2026) | CMS 1115 Waiver Tracker | NCHS Births 2024 | NLV Research</span>
+<span>Draft — March 2026</span>
+</div>
+
+<script>
+// dims: [expansion, postpartum12mo, pfml, sdohWaiver, mcoHigh, stateEITC]
+// 1=yes, 0=no, 0.5=partial/pending
+const tiers = [
+{tier:1,title:"Launch here — full bundle + payor infrastructure",sub:"Medicaid expansion + 12-mo postpartum + PFML + SDOH waivers + high MCO penetration",color:"#2a5a1a",
+desc:"These states have all six dimensions working: the full benefit bundle is available (including PFML wage replacement), MCOs are contracting for social-needs navigation through SDOH waivers, and state-level credits augment the federal EITC/CTC. The payor channel exists — a startup can sell B2B to MCOs that are already buying adjacent services like community health worker care coordination, doula support, and housing navigation. The question in these states isn't whether the market exists but whether you can win it.",
+states:[
+{name:"California",abbr:"CA",dims:[1,1,1,1,1,1],highlight:1,note:"CalAIM is the most mature SDOH infrastructure in the country. 15 categories of Community Supports. $1.44B in transition funding. PFML since 2004. State EITC (CalEITC). ~190K Medicaid-covered births/yr. The single strongest launch state."},
+{name:"New York",abbr:"NY",dims:[1,1,1,1,1,1],highlight:1,note:"$7.5B HRSN waiver — largest approved to date. 9 regional Social Care Networks. PFML since 2018. State EITC (30% of federal). ~100K Medicaid-covered births/yr. Second strongest launch market."},
+{name:"Massachusetts",abbr:"MA",dims:[1,1,1,1,1,1],highlight:0,note:"PFML since 2021. MassHealth strong MCO infrastructure. State EITC (40% of federal). Active SDOH initiatives. ~30K Medicaid births/yr."},
+{name:"New Jersey",abbr:"NJ",dims:[1,1,1,0.5,1,1],highlight:0,note:"PFML since 2009 (one of earliest). State EITC (40% of federal). High MCO penetration. SDOH waiver in development. ~40K Medicaid births/yr."},
+{name:"Connecticut",abbr:"CT",dims:[1,1,1,0.5,1,1],highlight:0,note:"PFML since 2022. State EITC (30.5% of federal). Strong Medicaid managed care. ~15K Medicaid births/yr."},
+{name:"Washington",abbr:"WA",dims:[1,1,1,0.5,1,0],highlight:0,note:"PFML since 2020. Apple Health (Medicaid) strong MCO market. SDOH initiatives growing. ~30K Medicaid births/yr."},
+{name:"Colorado",abbr:"CO",dims:[1,1,1,0.5,1,1],highlight:0,note:"FAMLI (PFML) launched Jan 2024. Medicaid expansion. State EITC (25% of federal). SDOH waiver activity. ~25K Medicaid births/yr."},
+{name:"Oregon",abbr:"OR",dims:[1,1,1,0.5,1,1],highlight:0,note:"Paid Leave Oregon since Sept 2023. Coordinated Care Organizations (CCO) model unique among states. State EITC (12% of federal). ~15K Medicaid births/yr."},
+{name:"Minnesota",abbr:"MN",dims:[1,1,1,0.5,1,1],highlight:0,note:"PFML launched Jan 2026 (newest). Medicaid expansion. State working family credit. Active SDOH work. Amara's state. ~25K Medicaid births/yr."}
+]},
+
+{tier:2,title:"Strong fundamentals — missing PFML or SDOH waivers",sub:"Medicaid expansion + 12-mo postpartum, but no PFML and/or limited SDOH payor infrastructure",color:"#185FA5",
+desc:"These states have Medicaid expansion and the postpartum extension — the benefit bundle is still substantial (minus the ~$3,500 PFML value). But without SDOH waivers, the payor market for navigation tools is thinner: MCOs aren't yet contracting for social-needs services at scale. A startup can operate here but may need to sell to hospitals (discharge screening) or FQHCs (intake screening) rather than MCOs. Several of these states are actively developing PFML legislation or SDOH waivers that could move them to Tier 1.",
+states:[
+{name:"Illinois",abbr:"IL",dims:[1,1,0,0.5,1,1],highlight:0,note:"No PFML. Large Medicaid volume (~65K births/yr). State EITC (20% of federal). High MCO penetration. SDOH activity emerging. High-volume Tier 2 market."},
+{name:"Michigan",abbr:"MI",dims:[1,1,0,0.5,1,1],highlight:0,note:"No PFML. ~50K Medicaid births/yr. State EITC (30% of federal). Strong MCO market. SDOH waiver discussions underway."},
+{name:"Pennsylvania",abbr:"PA",dims:[1,1,0,0,1,0],highlight:0,note:"No PFML (legislation active). ~55K Medicaid births/yr. No state EITC. High MCO penetration. PFML passage could move to Tier 1."},
+{name:"North Carolina",abbr:"NC",dims:[1,1,0,1,1,1],highlight:1,note:"Healthy Opportunities Pilots have strongest SDOH outcomes evidence ($1,020/yr savings per enrollee). HRSN waiver. But no PFML and program funding uncertain beyond 2025. State EITC. ~50K Medicaid births/yr. Could move to Tier 1 if funding stabilizes."},
+{name:"Ohio",abbr:"OH",dims:[1,1,0,0,1,0],highlight:0,note:"No PFML. ~60K Medicaid births/yr. High MCO penetration. No state EITC. Large volume but limited payor infrastructure for navigation."},
+{name:"Virginia",abbr:"VA",dims:[1,1,0,0,1,1],highlight:0,note:"PFML vetoed twice (2024, 2025) — could pass in 2026 session. State EITC (20% of federal). ~35K Medicaid births/yr."},
+{name:"Maryland",abbr:"MD",dims:[1,1,0.5,0.5,1,1],highlight:0,note:"PFML enacted — contributions begin Jan 2027, benefits Jan 2028. State EITC (45% of federal — one of most generous). ~25K Medicaid births/yr. Will move to Tier 1 when PFML activates."},
+{name:"Indiana",abbr:"IN",dims:[1,1,0,0,1,1],highlight:0,note:"No PFML. Medicaid expansion via HIP 2.0 (unique waiver model). State EITC (10% of federal). ~35K Medicaid births/yr."},
+{name:"Georgia",abbr:"GA",dims:[0.5,1,0,0,1,0],highlight:0,note:"Partial expansion only ('Pathways' — work requirements, covers ~3,400). 12-mo postpartum adopted. No PFML. No state EITC. ~60K Medicaid births/yr. High need, significant maternal health disparities, but weak policy environment. Destiny's state."},
+{name:"Arizona",abbr:"AZ",dims:[1,1,0,0,1,0],highlight:0,note:"No PFML. ~35K Medicaid births/yr. High MCO penetration (AHCCCS). No state EITC."},
+{name:"Delaware",abbr:"DE",dims:[1,1,1,0,1,0],highlight:0,note:"PFML launched Jan 2026 (newest). Small state. ~4K Medicaid births/yr. No state EITC. Limited SDOH infrastructure."},
+{name:"Rhode Island",abbr:"RI",dims:[1,1,1,0,1,1],highlight:0,note:"TCI/TDI programs (PFML predecessors). State EITC (15% of federal). Small state (~4K Medicaid births/yr). Strong social services but small market."}
+]},
+
+{tier:3,title:"High need, thin infrastructure",sub:"Medicaid expansion + postpartum extension, but no PFML, no SDOH waivers, thin MCO markets",color:"#534AB7",
+desc:"These states have expanded Medicaid and adopted the postpartum extension, but lack PFML, lack SDOH waivers, have limited MCO infrastructure, and/or have weak state credits. The benefit bundle is smaller, the payor market is thinner, and the institutional infrastructure for navigation is less developed. Many are rural states where geography itself is a barrier — sparse provider networks, limited broadband, and long distances between WIC offices, FQHCs, and hospitals. The focus population is large and underserved, but building a venture-backed business here is significantly harder.",
+states:[
+{name:"Louisiana",abbr:"LA",dims:[1,1,0,0,1,0],highlight:0,note:"No PFML. 64% of births are Medicaid-covered (highest in nation). No state EITC. High need, high volume (~30K Medicaid births), but no SDOH infrastructure."},
+{name:"Kentucky",abbr:"KY",dims:[1,1,0,0,1,0],highlight:0,note:"No PFML. ~25K Medicaid births/yr. High rural poverty. Limited broadband in eastern KY. James's state."},
+{name:"West Virginia",abbr:"WV",dims:[1,1,0,0,1,0],highlight:0,note:"No PFML. Small state. Very high Medicaid birth share. Extreme rurality and provider shortages."},
+{name:"New Mexico",abbr:"NM",dims:[1,1,0,0,1,0],highlight:0,note:"No PFML. Highest poverty rate in nation. ~12K Medicaid births/yr. Large rural and tribal populations. Lowest WIC coverage rates."},
+{name:"Montana",abbr:"MT",dims:[1,1,0,0,0,0],highlight:0,note:"Expansion via voter ballot. No PFML. Very low MCO penetration (fee-for-service dominant). Extreme rurality."},
+{name:"Idaho",abbr:"ID",dims:[1,1,0,0,0,0],highlight:0,note:"Expansion via voter ballot. No PFML. Low MCO penetration. Idaho still lacks a fully online SNAP application. Governor opposes expansion repeal."},
+{name:"South Dakota",abbr:"SD",dims:[1,1,0,0,0,0],highlight:0,note:"Expansion via voter ballot (2023). No PFML. Small state. Very low MCO penetration. Large Native American population with distinct needs."},
+{name:"Missouri",abbr:"MO",dims:[1,1,0,0,1,0],highlight:0,note:"Expansion via voter ballot (2021). No PFML. ~30K Medicaid births/yr. No state EITC."},
+{name:"Oklahoma",abbr:"OK",dims:[1,1,0,0,1,0],highlight:0,note:"Expansion via voter ballot (2021). No PFML. ~20K Medicaid births/yr. State EITC (5% of federal — minimal)."},
+{name:"Nebraska",abbr:"NE",dims:[1,1,0,0,1,0],highlight:0,note:"Expansion via voter ballot. No PFML. Plans early Medicaid work requirement enforcement (May 2026). ~10K Medicaid births/yr."}
+]},
+
+{tier:4,title:"Hardest environment — non-expansion, no PFML",sub:"No Medicaid expansion (or partial only), no PFML, no SDOH waivers — the benefit bundle is smallest and the postpartum cliff is steepest",color:"#993C1D",
+desc:"These states have not expanded Medicaid, meaning a parent who qualifies for pregnancy Medicaid may lose all coverage after 12 months postpartum if her income exceeds the state's non-pregnant adult threshold — which can be as low as 18–38% FPL in some states. None have PFML. None have SDOH waivers at scale. Three states — Texas, Florida, and Mississippi — account for the vast majority of the national Medicaid coverage gap. The full benefit bundle is worth the least here (no PFML, no state EITC in most, steepest postpartum cliffs), and the institutional payor market for a NavTech product essentially doesn't exist. These states represent the highest need and the hardest business environment simultaneously.",
+states:[
+{name:"Texas",abbr:"TX",dims:[0,1,0,0,1,0],highlight:1,note:"Largest low-income birth volume of any non-expansion state (~150K+ Medicaid births/yr). No PFML. No SDOH waiver. 42% of the national coverage gap. Non-pregnant adult Medicaid threshold is ~18% FPL for parents. Maria lives in Houston. The gap is widest here — and building a business here is hardest."},
+{name:"Florida",abbr:"FL",dims:[0,1,0,0,1,0],highlight:0,note:"~100K+ Medicaid births/yr. No PFML. 19% of coverage gap. Expansion ballot measure pivoting to 2028. Postpartum extension adopted but implementation issues (lawsuit alleging improper disenrollments)."},
+{name:"Mississippi",abbr:"MS",dims:[0,1,0,0,1,0],highlight:0,note:"No expansion. No PFML. Highest maternal mortality rate in nation. ~20K Medicaid births/yr. Extreme poverty and rural access barriers."},
+{name:"Alabama",abbr:"AL",dims:[0,1,0,0,1,0],highlight:0,note:"No expansion. No PFML. ~25K Medicaid births/yr. Postpartum extension adopted."},
+{name:"South Carolina",abbr:"SC",dims:[0,1,0,0,1,0],highlight:0,note:"No expansion. No PFML. ~25K Medicaid births/yr. Postpartum extension adopted."},
+{name:"Tennessee",abbr:"TN",dims:[0,1,0,0,1,0],highlight:0,note:"No expansion. No PFML. ~30K Medicaid births/yr. TennCare (Medicaid MCO) has some care coordination but no SDOH waiver."},
+{name:"Kansas",abbr:"KS",dims:[0,1,0,0,1,0],highlight:0,note:"No expansion. Governor backed off expansion push in 2026. No PFML. ~15K Medicaid births/yr."},
+{name:"Wyoming",abbr:"WY",dims:[0,1,0,0,0,0],highlight:0,note:"No expansion. No PFML. Smallest state population. Very few Medicaid births. Fee-for-service Medicaid."},
+{name:"Wisconsin",abbr:"WI",dims:[0.5,1,0,0,1,1],highlight:0,note:"Partial expansion (covers to 100% FPL, not 138%). Just passed 12-mo postpartum extension in 2026. No PFML. State EITC (11% of federal). ~25K Medicaid births/yr. No coverage gap but misses enhanced federal match."},
+{name:"Arkansas",abbr:"AR",dims:[0,0,0,0,1,0],highlight:0,note:"The only state that has NOT adopted the 12-month postpartum extension. No expansion (uses limited 'Arkansas Works' waiver). No PFML. No state EITC. Hardest single-state policy environment for this journey."}
+]}
+];
+
+const dimNames=["Expansion","12-mo PP","PFML","SDOH waiver","MCO high","State EITC"];
+
+// Build tiers
+const container = document.getElementById("tiers");
+tiers.forEach((t,ti)=>{
+  const tierEl = document.createElement("div");
+  tierEl.className = "tier tier-"+t.tier+(ti===0?" open":"");
+  
+  const stateChips = t.states.map((s,si)=>{
+    const dims = s.dims.map((d,di)=>{
+      const cls = d===1?"yes":(d===0?"no":"partial");
+      return `<div class="sc-dim ${cls}" title="${dimNames[di]}: ${d===1?'Yes':(d===0?'No':'Partial/pending')}"></div>`;
+    }).join("");
+    return `<div class="state-chip${s.highlight?' highlight':''}" data-tier="${ti}" data-state="${si}">
+      <span class="sc-name">${s.name}</span><span class="sc-abbr">${s.abbr}</span>
+      <div class="sc-dims">${dims}</div>
+    </div>`;
+  }).join("");
+
+  tierEl.innerHTML = `
+    <div class="tier-header" onclick="toggleTier(this)">
+      <div class="tier-num">${t.tier}</div>
+      <div class="tier-meta"><div class="tier-title">${t.title}</div><div class="tier-sub">${t.sub}</div></div>
+      <div class="tier-count">${t.states.length} states</div>
+      <div class="tier-arrow">›</div>
+    </div>
+    <div class="tier-body">
+      <div class="tier-desc">${t.desc}</div>
+      <div class="state-grid">${stateChips}</div>
+      <div class="state-detail" id="sd-${ti}"></div>
+    </div>`;
+  container.appendChild(tierEl);
+});
+
+// Click handlers
+document.querySelectorAll(".state-chip").forEach(chip=>{
+  chip.addEventListener("click",function(){
+    const ti=+this.dataset.tier, si=+this.dataset.state;
+    const s=tiers[ti].states[si];
+    // Deselect others in this tier
+    this.closest(".tier-body").querySelectorAll(".state-chip").forEach(c=>c.classList.remove("sel"));
+    this.classList.add("sel");
+    
+    const dimGrid = s.dims.map((d,di)=>{
+      const cls=d===1?"yes":(d===0?"no":"partial");
+      const val=d===1?"Yes":(d===0?"No":"Partial / pending");
+      return `<div class="sd-item ${cls}"><div class="sdi-label">${dimNames[di]}</div><div class="sdi-val">${val}</div></div>`;
+    }).join("");
+    
+    const det = document.getElementById("sd-"+ti);
+    det.innerHTML=`<div class="sd-header"><div class="sd-name">${s.name}</div></div><div class="sd-grid">${dimGrid}</div><div class="sd-note">${s.note}</div>`;
+    det.classList.add("show");
+  });
+});
+
+function toggleTier(header){
+  header.closest(".tier").classList.toggle("open");
+}
+</script>
+</body>
+</html>
