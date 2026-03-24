@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Navigator–Payor Alignment — New Parent Benefits Journey — NextLadder Ventures</title>
+<style>
+:root{
+--nlv-white:#FFF8EF;--nlv-black:#190501;--nlv-grey:#D4C8BF;--nlv-brown:#6E2B21;
+--nlv-violet:#C2A0F1;--nlv-blue:#85DEFF;--nlv-green:#BDE998;--nlv-orange:#FFA560;--nlv-yellow:#FFE284;
+--nlv-font-body:"Inter","Helvetica Neue",Arial,sans-serif;
+--nlv-font-display:"Courier New","Courier",monospace;
+--nlv-font-mono:"JetBrains Mono","Fira Code","Courier New",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--nlv-font-body);background:var(--nlv-white);color:var(--nlv-black);padding:2rem;max-width:1100px;margin:0 auto}
+.branding{font-family:var(--nlv-font-mono);font-size:11px;color:var(--nlv-brown);letter-spacing:1px;text-transform:uppercase;margin-bottom:24px;padding-bottom:12px;border-bottom:2px solid var(--nlv-brown)}
+h1{font-family:var(--nlv-font-display);font-size:26px;font-weight:400;color:var(--nlv-brown);margin-bottom:4px}
+.subtitle{font-size:14px;color:#888;margin-bottom:8px}
+.desc{font-size:13px;color:#666;line-height:1.6;margin-bottom:28px}
+.section-label{font-family:var(--nlv-font-mono);font-size:11px;color:var(--nlv-brown);letter-spacing:.5px;text-transform:uppercase;margin-bottom:12px;margin-top:28px}
+
+/* ---- 2x2 MATRIX ---- */
+.matrix-wrap{position:relative;margin-bottom:32px}
+.matrix-labels{position:relative;height:0}
+.matrix{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:3px;height:520px;border-radius:12px;overflow:hidden;border:1px solid var(--nlv-grey)}
+.quad{padding:16px;position:relative;overflow:auto}
+.quad-label{font-family:var(--nlv-font-mono);font-size:9px;text-transform:uppercase;letter-spacing:1px;position:absolute;top:10px;left:14px;opacity:.5}
+.q-tl{background:#e8f5e2}.q-tl .quad-label{color:#2a5a1a}
+.q-tr{background:#f0ebe4}.q-tr .quad-label{color:#888}
+.q-bl{background:#f4f0fa}.q-bl .quad-label{color:#534AB7}
+.q-br{background:#fef6f4}.q-br .quad-label{color:#993C1D}
+
+/* Axis labels */
+.axis-y{position:absolute;left:-28px;top:50%;transform:rotate(-90deg) translateX(-50%);transform-origin:0 0;font-family:var(--nlv-font-mono);font-size:10px;color:#aaa;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+.axis-x{text-align:center;font-family:var(--nlv-font-mono);font-size:10px;color:#aaa;letter-spacing:1px;text-transform:uppercase;margin-top:6px}
+.axis-labels-y{position:absolute;left:-24px;top:0;height:100%;display:flex;flex-direction:column;justify-content:space-between;font-family:var(--nlv-font-mono);font-size:9px;color:#bbb}
+.axis-labels-x{display:flex;justify-content:space-between;font-family:var(--nlv-font-mono);font-size:9px;color:#bbb;margin-top:4px;padding:0 4px}
+
+/* Navigator cards inside quadrants */
+.nav-card{background:#fff;border-radius:8px;padding:12px;margin:28px 4px 8px 4px;border:1.5px solid transparent;cursor:pointer;transition:all .25s;position:relative}
+.nav-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(25,5,1,.08)}
+.nav-card.sel{border-color:var(--nlv-brown);box-shadow:0 4px 16px rgba(110,43,33,.15)}
+.nc-header{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.nc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.nc-name{font-size:13px;font-weight:600;color:var(--nlv-black)}
+.nc-employer{font-family:var(--nlv-font-mono);font-size:10px;color:#999;margin-bottom:4px}
+.nc-stages{display:flex;gap:3px;margin-bottom:6px}
+.nc-stage{font-family:var(--nlv-font-mono);font-size:9px;padding:2px 7px;border-radius:10px;background:#f0ebe4;color:#999}
+.nc-stage.active{background:var(--nlv-brown);color:var(--nlv-white)}
+.nc-summary{font-size:11px;color:#888;line-height:1.4}
+
+/* ---- DETAIL PANEL ---- */
+.detail{display:none;background:#fff;border:1px solid var(--nlv-grey);border-radius:10px;padding:20px;margin-bottom:24px;animation:fadeUp .3s ease}
+.detail.show{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.det-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.det-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0}
+.det-name{font-family:var(--nlv-font-display);font-size:20px;font-weight:400;color:var(--nlv-brown)}
+.det-tier{font-family:var(--nlv-font-mono);font-size:10px;padding:3px 10px;border-radius:10px;background:#f0ebe4;color:#999}
+.det-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.det-box{border-radius:8px;padding:14px}
+.det-box .db-label{font-family:var(--nlv-font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.det-box.positioning{background:#f0f7ec}.det-box.positioning .db-label{color:#2a5a1a}
+.det-box.incentive{background:#f4f0fa}.det-box.incentive .db-label{color:#534AB7}
+.det-box.product{background:#f0f5fa}.det-box.product .db-label{color:#185FA5}
+.det-box.risk{background:#fef6f4}.det-box.risk .db-label{color:#993C1D}
+.det-box p{font-size:12px;color:#666;line-height:1.6}
+.det-box strong{color:var(--nlv-black)}
+
+.det-payor{border:1px dashed var(--nlv-grey);border-radius:8px;padding:14px;margin-bottom:16px}
+.det-payor .dp-label{font-family:var(--nlv-font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--nlv-brown);margin-bottom:6px}
+.det-payor .dp-flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.dp-node{font-size:12px;padding:6px 12px;border-radius:6px;font-weight:500}
+.dp-buyer{background:var(--nlv-brown);color:var(--nlv-white)}
+.dp-tool{background:var(--nlv-violet);color:var(--nlv-black)}
+.dp-nav{background:var(--nlv-green);color:var(--nlv-black)}
+.dp-parent{background:var(--nlv-blue);color:var(--nlv-black)}
+.dp-arrow{color:#bbb;font-size:16px}
+
+.det-companies{margin-top:12px}
+.det-companies .dc-label{font-family:var(--nlv-font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:#999;margin-bottom:6px}
+.det-companies .dc-list{font-size:12px;color:#666;line-height:1.6}
+
+/* ---- KEY / LEGEND ---- */
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;font-size:12px;color:#888}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+.note{font-size:12px;color:#aaa;margin-top:24px;line-height:1.5;font-style:italic;border-top:1px solid var(--nlv-grey);padding-top:16px}
+.footer{margin-top:24px;padding-top:12px;border-top:1px solid var(--nlv-grey);font-family:var(--nlv-font-mono);font-size:10px;color:#bbb;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+</style>
+</head>
+<body>
+<div class="branding">NextLadder Ventures — New Parent Benefits Journey</div>
+<h1>Navigator–payor alignment map</h1>
+<p class="subtitle">Who is best positioned to improve outcomes, and who has a financial incentive to pay for a solution?</p>
+<p class="desc">This visual maps every navigator identified in the new parent service blueprint across two dimensions: <strong>positioning</strong> (how well-placed they are to comprehensively screen and enroll new parents across the full benefit bundle) and <strong>financial incentive</strong> (whether the navigator or their employing institution has a direct economic reason to invest in better outcomes). Click any navigator to see the full analysis — including the payor flow, product concept, and relevant companies from NLV's field mapping.</p>
+
+<div class="legend">
+  <span><span class="dot" style="background:#2a5a1a"></span> Tier 1: Positioned + incentivized</span>
+  <span><span class="dot" style="background:#534AB7"></span> Tier 2: Positioned, needs a payor</span>
+  <span><span class="dot" style="background:#FFA560"></span> Tier 3: Narrow or misaligned</span>
+</div>
+
+<div class="matrix-wrap">
+  <div class="axis-x">Financial incentive to invest in better benefits enrollment outcomes →</div>
+  <div class="axis-labels-x"><span>Weak / indirect</span><span>Strong / direct</span></div>
+  <div class="matrix" id="matrix">
+    <div class="quad q-tl"><div class="quad-label">Positioned + incentivized = Build here</div><div id="q-tl"></div></div>
+    <div class="quad q-tr"><div class="quad-label">Incentivized but less positioned</div><div id="q-tr"></div></div>
+    <div class="quad q-bl"><div class="quad-label">Positioned but needs a payor</div><div id="q-bl"></div></div>
+    <div class="quad q-br"><div class="quad-label">Narrow positioning + weak incentive</div><div id="q-br"></div></div>
+  </div>
+</div>
+
+<div class="detail" id="detail"></div>
+
+<div class="section-label">Reading the map</div>
+<p class="desc" style="margin-top:4px"><strong>Top-left quadrant (green)</strong> is the sweet spot: navigators (or their employing institutions) that are both well-positioned to improve outcomes and have a direct financial incentive to do so. This is where a venture-backed NavTech company should sell. <strong>Bottom-left (purple)</strong> contains navigators who are excellent at the work but are funded by grants or government — they need a payor (typically an MCO or hospital) to fund the tool on their behalf. <strong>Top-right (tan)</strong> contains actors with money but less direct contact with the parent. <strong>Bottom-right (red)</strong> contains navigators with narrow positioning or misaligned incentives — important for the ecosystem but harder to build a business around. The <strong>payor flow diagrams</strong> in each detail card show the money path: who buys the tool, who deploys it, and who it ultimately serves.</p>
+
+<p class="note">This analysis is specific to the new parent benefits journey. Navigator positioning and financial incentives differ across other journeys (e.g., post-incarceration, disability onset). The payor models draw from NLV's Benefits Access Market Exploration (2026), particularly the working document on Problem and Opportunity Areas, the Early Thinking Writeup, and the field mapping of companies in the space. Relevant companies named are from NLV's existing research and represent the types of solutions that could serve each channel — not endorsements.</p>
+
+<div class="footer">
+<span>Sources: NLV Benefits Access Market Exploration (2026) | New Parent Benefits Service Blueprint (2026) | NLV Field Mapping</span>
+<span>Draft — March 2026</span>
+</div>
+
+<script>
+const navs = [
+// TIER 1 — Top-left quadrant: Positioned + Incentivized
+{id:"mco",name:"Medicaid MCOs",employer:"Private managed care organizations contracted by states",dot:"#2a5a1a",tier:"Tier 1",quad:"q-tl",
+stages:[0,1,0,0,0,1,1],stageNames:["S1","S2","S3","S4","S5","S6","S7"],
+summary:"Strongest financial incentive in the ecosystem. Lose revenue when eligible members aren't enrolled or churn off.",
+positioning:"MCOs don't directly navigate — they <strong>employ and contract with</strong> the navigators who do (community health workers, care coordinators, doulas). This makes them the orchestration layer. In states with SDOH waivers (California CalAIM, New York $7.5B HRSN), MCOs are already paying for non-medical services including housing navigation, meal support, and community health worker services. A new parent benefits screening tool deployed through MCO-contracted navigators would reach the population at scale. MCOs touch the parent at Medicaid enrollment (Stage 2), through contracted providers during prenatal care, and through care management postpartum (Stages 6–7).",
+incentive:"<strong>Direct revenue protection.</strong> MCOs receive capitated payments per enrolled member per month. Every month a pregnant woman isn't enrolled = lost capitation. Every infant not enrolled = lost capitated life. Postpartum churn at 60 days (vs. 12-month extension) = 10 months of lost revenue per member. Additionally, successful WIC enrollment improves birth outcomes (reduced preterm birth, lower NICU costs), directly reducing the MCO's medical loss ratio. The thesis team identifies MCOs as a primary payor category, noting they 'have strong incentive to enroll eligible beneficiaries to prevent revenue loss from administrative churn.'",
+product:"<strong>Care management / benefits screening platform</strong> sold B2B to MCOs, deployed through their contracted CHW and doula workforce. The tool screens for the full benefit bundle (not just Medicaid) at prenatal, delivery, and postpartum touchpoints — because WIC enrollment, SNAP adequacy, and childcare stability all reduce the MCO's downstream medical costs. Pricing: per-member-per-month SaaS or outcomes-based (payment tied to enrollment retention rates).",
+risk:"MCO procurement can be slow and relationship-heavy. Large MCOs (Molina, Centene, UnitedHealth) have existing care management platforms. Differentiation requires demonstrating that cross-program enrollment (beyond Medicaid) reduces medical costs — an evidence case that is emerging but not yet definitive in all markets.",
+flow:["MCO pays","NavTech tool","CHW / Doula deploys","Parent served"],
+flowTypes:["dp-buyer","dp-tool","dp-nav","dp-parent"],
+companies:"<strong>Pair Team</strong> — tech-enabled medical group partnering with CBOs, CalAIM contracts with MCOs. <strong>Zocalo Health</strong> — virtual primary care for Latino communities with integrated promotoras. <strong>Papa.com</strong> — companion care workforce contracted by health plans. <strong>Mirza</strong> — employer and Medicaid SDOH benefits enrollment."},
+{id:"hospital",name:"Hospital systems",employer:"Hospital corporations, safety-net hospitals, academic medical centers",dot:"#2a5a1a",tier:"Tier 1",quad:"q-tl",
+stages:[0,1,0,0,1,0,0],stageNames:["S1","S2","S3","S4","S5","S6","S7"],
+summary:"$36B/yr in uncompensated care creates direct ROI for Medicaid enrollment. Discharge is the highest-leverage screening moment.",
+positioning:"Hospitals are the Stage 5 (discharge) touchpoint — the single most concentrated opportunity in the entire journey. The parent is in-facility for 1–4 days, surrounded by staff. Hospital financial counselors already work to enroll patients in Medicaid because the hospital's revenue depends on it. Hospital social workers conduct safety screening at discharge. Extending the financial counselor's role from 'get Medicaid for this delivery' to 'screen for the full bundle' requires minimal structural change — it's expanding an existing workflow, not creating a new one. Hospitals also influence Stage 2 through presumptive eligibility (hospitals are authorized presumptive eligibility providers in 45+ states).",
+incentive:"<strong>Direct cost recovery.</strong> Hospital uncompensated care totaled $36 billion last year. Every uninsured delivery the hospital can convert to Medicaid-covered = $18K–$30K in revenue recovered. Beyond the delivery itself, hospitals with postpartum programs benefit from continued Medicaid coverage (12-month extension) because it covers follow-up visits. Safety-net hospitals that serve disproportionate shares of Medicaid patients have especially strong incentives — their financial viability depends on enrollment rates.",
+product:"<strong>Discharge-embedded benefits screening module</strong> integrated into the hospital's EHR (Epic, Cerner) or discharge workflow system. At discharge, the tool automatically screens every birthing parent for WIC, SNAP, CTC, PFML, and childcare subsidy eligibility — generating warm referrals with pre-populated applications and scheduling follow-up. Also includes a <strong>post-discharge text navigator</strong> that sends timed nudges (day 3, 7, 14) with actionable next steps. Pricing: per-discharge fee or annual site license.",
+risk:"Hospital IT procurement is complex and EHR integration is technically demanding. Epic and Cerner have their own referral modules (though they don't do multi-program benefits screening). The financial counselor's current scope is narrow (Medicaid enrollment for the hospital's benefit) — expanding it to 'full bundle' requires showing that the additional screening time generates value for the hospital, not just for the patient.",
+flow:["Hospital pays","Screening module","Financial counselor / social worker deploys","Parent served"],
+flowTypes:["dp-buyer","dp-tool","dp-nav","dp-parent"],
+companies:"<strong>Nava</strong> — government and health system tech. <strong>UniteUs</strong> — closed-loop referral platform used by hospitals. <strong>FindHelp</strong> — resource directory and referral platform integrated with health systems."},
+{id:"fqhc",name:"FQHCs",employer:"Federally Qualified Health Centers (community health centers funded by HRSA)",dot:"#2a5a1a",tier:"Tier 1",quad:"q-tl",
+stages:[1,1,1,0,0,0,0],stageNames:["S1","S2","S3","S4","S5","S6","S7"],
+summary:"Primary prenatal care provider for many low-income women. Enhanced Medicaid reimbursement = revenue incentive. Mission-aligned.",
+positioning:"FQHCs are the Stage 1 (pregnancy confirmation) and Stage 2 (Medicaid enrollment) touchpoint for a large share of the focus population. They serve 30M+ patients, many uninsured. FQHC intake workers are already more likely to screen for Medicaid and WIC than private OB/GYN practices — the organizational culture is oriented toward holistic care. Some FQHCs co-locate WIC services, creating a two-program touchpoint. A comprehensive screening tool at FQHC intake would catch patients at the earliest moment in the journey.",
+incentive:"<strong>Enhanced Medicaid reimbursement.</strong> FQHCs receive a prospective payment system (PPS) rate for Medicaid patients that is higher than standard Medicaid reimbursement. Getting a patient enrolled in Medicaid increases revenue per visit. FQHCs also receive HRSA grant funding that is tied to patient outcomes, including prenatal care initiation and insurance coverage rates — creating a reporting incentive alongside the revenue incentive. Mission alignment is strong: these organizations exist to serve this population.",
+product:"<strong>Intake-embedded multi-program screener</strong> that runs at the first prenatal visit, covering Medicaid (including presumptive eligibility activation), WIC, SNAP, CTC, PFML, and childcare subsidies. The tool pre-populates applications using data already collected at intake (income, household size, address) and generates referrals with scheduled follow-up. Pricing: per-patient or annual subscription, potentially subsidized by HRSA innovation grants.",
+risk:"FQHCs have limited technology budgets — though HRSA capital grants can fund IT investments. Many FQHCs use Athenahealth or NextGen as their EHR, which have different integration requirements than Epic/Cerner. The FQHC market is fragmented (1,400+ FQHCs nationally), requiring either a direct sales model or a channel partnership through FQHC networks (e.g., NACHC, state primary care associations).",
+flow:["FQHC pays (or HRSA grant)","Screening tool","Intake worker deploys","Parent served"],
+flowTypes:["dp-buyer","dp-tool","dp-nav","dp-parent"],
+companies:"<strong>Mirza</strong> — employer and healthcare benefits enrollment. <strong>mRelief</strong> — SNAP screening and enrollment tools. <strong>MyFriendBen</strong> — open-source multi-program screener (built on PolicyEngine)."},
+
+// TIER 2 — Bottom-left: Positioned but needs a payor
+{id:"homevisit",name:"Home visitors",employer:"Health departments, CBOs (Nurse-Family Partnership, Parents as Teachers, Healthy Families America)",dot:"#534AB7",tier:"Tier 2",quad:"q-bl",
+stages:[1,1,1,0,0,1,1],stageNames:["S1","S2","S3","S4","S5","S6","S7"],
+summary:"Best-positioned navigator for quality of interaction. Enters the home, builds trust, sees full context. But grant-funded — needs a payor.",
+positioning:"Home visitors are the gold standard for comprehensive, relationship-based navigation. They visit during pregnancy and continue postpartum — covering Stages 1–3 and 6–7. They see the home environment, understand the family's full situation, and have the trust to ask about sensitive topics (immigration status, domestic violence, mental health). Nurse-Family Partnership alone has evidence from multiple RCTs showing improved birth outcomes and long-term economic mobility. The problem is reach: home visiting programs serve only a fraction of eligible families due to funding constraints.",
+incentive:"<strong>Indirect — through funders and MCO contracts.</strong> Home visiting programs are funded by federal MIECHV grants, state funding, and increasingly by Medicaid MCOs (in states with SDOH waivers). The home visiting organizations themselves don't have a financial incentive to buy software — but their funders (states, MCOs) do. MCOs are the most promising path: an MCO that contracts with a home visiting program could fund a benefits screening tool as part of the care management contract. MIECHV also measures benefits enrollment as a performance metric, creating a reporting incentive.",
+product:"<strong>Mobile-first benefits screening and enrollment tool</strong> designed for use during home visits. The tool runs on a tablet or phone, guides the home visitor through a comprehensive screening conversation, auto-determines eligibility across all six programs, and generates applications that can be submitted on-site or queued for follow-up. Includes a case management layer for tracking enrollment status across visits. Sold to the <strong>MCO or state health department</strong> that contracts with the home visiting program — not to the home visitor directly.",
+risk:"Home visiting workforce is small and varies in technical sophistication. The tool must be simple enough for a nurse or paraprofessional to use in a home setting with potentially limited connectivity. Funding is grant-dependent and can be unstable. The MCO payor path requires that the MCO values benefits enrollment as a component of care management, which is established in SDOH-waiver states but not universal.",
+flow:["MCO or state pays","NavTech tool","Home visitor deploys","Parent served"],
+flowTypes:["dp-buyer","dp-tool","dp-nav","dp-parent"],
+companies:"<strong>Nurse-Family Partnership</strong> — national home visiting evidence-based model. <strong>Pair Team</strong> — partners with CBOs, trains staff as CHWs, contracts with MCOs. <strong>Amplifi</strong> — case management platform for navigator organizations."},
+{id:"doula",name:"Birth doulas",employer:"Independent, doula agencies, or Medicaid-contracted (in ~10 states)",dot:"#534AB7",tier:"Tier 2",quad:"q-bl",
+stages:[1,0,0,1,1,1,0],stageNames:["S1","S2","S3","S4","S5","S6","S7"],
+summary:"Deep trust, extended contact, present at birth. Emerging Medicaid coverage in ~10 states. Doula-as-navigator is a growing model.",
+positioning:"Doulas provide continuous support during pregnancy, labor, and postpartum — covering Stages 1, 4, 5, and 6. They have the deepest trust relationship of any navigator in this journey, especially for communities with historical distrust of institutions (Black women, immigrant families). They are present at the birth (Stage 5) — the critical discharge moment — and provide postpartum home visits. The doula-as-navigator model is emerging: training doulas to conduct benefits screening alongside their core support role. Medicaid coverage of doula services is expanding (~10 states and growing), creating a funded delivery channel.",
+incentive:"<strong>Indirect — through Medicaid billing and doula program expansion.</strong> Individual doulas don't buy software. But Medicaid agencies building doula benefit programs need infrastructure to train, deploy, and track outcomes for their doula workforce. A tool that helps doulas document benefits screening as part of their billable Medicaid services makes the doula-as-navigator model reimbursable — which is the key to scaling it. Doula training organizations and Medicaid agencies are the buyers.",
+product:"<strong>Doula practice management tool with embedded benefits screening.</strong> Combines appointment scheduling, prenatal/postpartum visit documentation, Medicaid billing, and a multi-program benefits screener into a single mobile app. When a doula conducts a benefits screening conversation during a home visit, the tool captures the interaction, determines eligibility, and generates referrals — all documented for Medicaid reimbursement. Sold to <strong>state Medicaid agencies</strong> building doula programs or to <strong>doula agencies/networks</strong>.",
+risk:"The doula workforce is small, fragmented, and predominantly independent. Medicaid doula benefits are new and implementation varies widely by state. Reimbursement rates for doula services are often low ($1,000–$3,000 per birth in most states), limiting the budget for technology. The market is early-stage.",
+flow:["Medicaid agency or doula network pays","Doula tool + screener","Doula deploys","Parent served"],
+flowTypes:["dp-buyer","dp-tool","dp-nav","dp-parent"],
+companies:"<strong>HealthConnect One</strong> — community-based doula training. <strong>Mamatoto Village</strong> — Black maternal health and doula services. This is a whitespace area in NLV's field mapping — few NavTech companies target the doula channel specifically."},
+{id:"pediatric",name:"Pediatric offices",employer:"Private pediatric practices, hospital-affiliated clinics, FQHC pediatrics",dot:"#534AB7",tier:"Tier 2",quad:"q-bl",
+stages:[0,0,0,0,0,1,1],stageNames:["S1","S2","S3","S4","S5","S6","S7"],
+summary:"See baby at regular intervals (2wk, 1mo, 2mo). Could screen at every well-child visit — but currently don't. Needs EHR integration path.",
+positioning:"Pediatric offices are the most consistent touchpoint during Stages 6 and 7 — they see the baby at 2 weeks, 1 month, 2 months, 4 months, 6 months, 9 months, and 12 months. That's 7+ visits in the first year alone. Each visit is a potential screening moment. Pediatricians already screen for developmental milestones, postpartum depression (via the Edinburgh scale at some practices), and food insecurity (via the Hunger Vital Sign). Adding benefits screening to this existing screening workflow is a natural extension. The pediatrician also has an existing trusted relationship with the parent.",
+incentive:"<strong>Indirect but growing.</strong> Keeping a patient on Medicaid means the pediatrician gets paid for well-child visits. Some value-based Medicaid contracts reward pediatric practices for SDOH screening and referral completion. But most pediatric practices aren't accustomed to buying benefits-screening tools. The path is through <strong>EHR integration</strong> (embedding a screening module in Epic, Cerner, or Athenahealth that runs at check-in) or through <strong>MCO-funded care management</strong> that equips contracted pediatric providers with screening tools.",
+product:"<strong>Well-child visit benefits screening module</strong> embedded in the pediatric EHR. At each visit check-in, the tool auto-screens the family's current enrollment status and flags gaps (e.g., 'this family is on Medicaid but not enrolled in WIC — infant is eligible'). Generates a warm referral that the front desk can hand to the parent before they leave. Sold to <strong>EHR vendors as an add-on</strong>, to <strong>large pediatric networks</strong>, or funded by <strong>MCOs</strong> through their contracted provider network.",
+risk:"Pediatric practices have limited time per visit (15 minutes average) and adding benefits screening competes with clinical priorities. EHR integration is technically complex and vendor-dependent. Individual practices are unlikely direct buyers — the sales path requires aggregation through networks, MCOs, or EHR platforms.",
+flow:["MCO or EHR vendor pays","Screening module","Pediatric staff deploys","Parent served"],
+flowTypes:["dp-buyer","dp-tool","dp-nav","dp-parent"],
+companies:"<strong>UniteUs</strong> — referral platform integrated with health systems. <strong>FindHelp</strong> — resource directory in clinical settings. <strong>Pieces Technologies</strong> — AI-powered clinical decision support (adjacent)."},
+{id:"wic",name:"WIC counselors",employer:"State WIC agencies, local health departments",dot:"#534AB7",tier:"Tier 2",quad:"q-bl",
+stages:[0,0,1,0,0,0,1],stageNames:["S1","S2","S3","S4","S5","S6","S7"],
+summary:"Regular contact at certification and recertification. Already in the benefits ecosystem. But government-funded with minimal tech budgets.",
+positioning:"WIC counselors see the parent at certification (Stage 3) and at regular recertification intervals (Stage 7). They are already asking about income, household composition, and program participation — information that could feed cross-enrollment screening for SNAP, CTC, and childcare subsidies. WIC counselors are among the most trusted navigators for this population. The WIC CIAO Project is specifically focused on increasing participation, creating institutional momentum for innovation.",
+incentive:"<strong>Weak direct incentive — but policy-driven.</strong> WIC agencies are government entities with fixed budgets. They don't profit from increased enrollment. However, USDA tracks WIC coverage rates and provides funding tied to participation targets. The WIC CIAO Project is investing in technology and outreach to increase coverage. State WIC directors are evaluated partly on participation rates. This creates a performance incentive rather than a revenue incentive. The path to a sale is through <strong>state WIC agency modernization contracts</strong> or through <strong>NLV grantmaking</strong> supporting open infrastructure (rules engines, cross-enrollment tools) that WIC agencies can adopt.",
+product:"<strong>Cross-enrollment screening tool for WIC certification appointments.</strong> When a parent comes in for WIC certification, the tool screens for SNAP, Medicaid, CTC, PFML, and childcare subsidies — turning the WIC appointment into a full benefits touchpoint. Could be built on PolicyEngine's open-source rules engine. Sold to <strong>state WIC agencies</strong> or funded through <strong>USDA/USDA-FNS innovation grants</strong>. Alternatively, the cross-enrollment trigger could work in reverse: a tool that <strong>auto-refers Medicaid enrollees to WIC</strong>, deployed through the Medicaid agency side.",
+risk:"Government procurement is slow. WIC agencies use legacy IT systems. The cross-enrollment data-sharing barrier between WIC and Medicaid agencies (separate systems, separate departments) is a structural obstacle that technology alone can't solve — it requires policy and interoperability infrastructure.",
+flow:["State WIC agency or USDA grant pays","Cross-enrollment tool","WIC counselor deploys","Parent served"],
+flowTypes:["dp-buyer","dp-tool","dp-nav","dp-parent"],
+companies:"<strong>PolicyEngine</strong> — open-source rules engine for benefits eligibility. <strong>MyFriendBen</strong> — multi-program screener built on PolicyEngine. <strong>mRelief</strong> — SNAP enrollment tools that could extend to cross-program screening."},
+
+// TIER 3 — other quadrants
+{id:"obgyn",name:"OB/GYN front desk staff",employer:"Private OB/GYN practices, hospital-affiliated clinics",dot:"#FFA560",tier:"Tier 3",quad:"q-br",
+stages:[1,0,0,0,0,0,0],stageNames:["S1","S2","S3","S4","S5","S6","S7"],
+summary:"First human touchpoint (Stage 1) but no financial incentive to screen beyond what the practice needs clinically.",
+positioning:"OB/GYN front desk staff are the first point of contact at Stage 1. But they are typically focused on scheduling and insurance verification — not benefits screening. Private OB/GYN practices have no organizational mission or financial incentive to screen for WIC, SNAP, or CTC. The exception is when the practice is part of a hospital system or FQHC, in which case the hospital/FQHC incentives apply. For independent practices, the path to benefits screening runs through the MCO: if the MCO requires or incentivizes contracted OB/GYN providers to screen, the practice may comply.",
+incentive:"<strong>Minimal.</strong> Private OB/GYN practices are paid for clinical services. Benefits screening doesn't generate revenue and takes staff time. Unless the MCO or a hospital system mandates it as a contract requirement, private practices are unlikely to invest in screening tools.",
+product:"If sold at all, it would be as a lightweight add-on to existing practice management software — a 2-minute intake screener that generates a referral printout. More likely deployed through the <strong>MCO channel</strong> (MCO requires screening as a quality measure) rather than sold directly to practices.",
+risk:"Extremely fragmented market (thousands of independent practices). No natural buyer. Low willingness to pay. Staff time is constrained.",
+flow:["MCO mandates (or no buyer)","Lightweight screener","Front desk staff deploys","Parent served"],
+flowTypes:["dp-buyer","dp-tool","dp-nav","dp-parent"],
+companies:"No direct NavTech companies target private OB/GYN benefits screening specifically."},
+{id:"vita",name:"VITA sites / CCR&Rs",employer:"IRS-funded volunteer sites (VITA), state childcare agencies (CCR&Rs)",dot:"#FFA560",tier:"Tier 3",quad:"q-br",
+stages:[0,0,0,0,0,0,1],stageNames:["S1","S2","S3","S4","S5","S6","S7"],
+summary:"Critical for Stage 7 (tax credits, childcare subsidies) but grant-funded, capacity-constrained, and not natural software buyers.",
+positioning:"VITA volunteers and CCR&R staff are the primary navigators for tax credit claiming and childcare subsidy applications (Stage 7). They are well-positioned for that specific stage — VITA volunteers understand the tax system, CCR&Rs understand subsidy rules. But they have no role in Stages 1–6 and their capacity is severely limited (VITA sites have long wait times, are geographically sparse, and lack bilingual volunteers).",
+incentive:"<strong>None directly.</strong> VITA is a volunteer program. CCR&Rs are government-funded. Neither has revenue tied to enrollment outcomes. The financial incentive for better tax credit claiming sits with <strong>fintech companies</strong> (who can capture value from successful filings) and <strong>credit unions</strong> (who benefit from members receiving large refunds that flow into accounts). The Starlight model — credit unions funding benefits navigation as a member service — is the most promising commercial path for Stage 7.",
+product:"<strong>Not sold to VITA/CCR&Rs directly.</strong> Instead, Stage 7 solutions should be embedded in <strong>fintech products</strong> (earned wage access, neobanks, tax prep tools) that reach the focus population through commercial channels. Alternatively, <strong>employer-deployed tools</strong> (like Mirza) that flag EITC/CTC eligibility for low-wage workers.",
+risk:"Fintech products reaching the focus population may bundle predatory features (high-fee refund advances). The Intuit/TurboTax model of steering free-eligible filers to paid tiers is a cautionary example the thesis team flags explicitly.",
+flow:["Fintech or credit union pays","Tax/benefits tool","Embedded in product","Parent self-serves"],
+flowTypes:["dp-buyer","dp-tool","dp-nav","dp-parent"],
+companies:"<strong>Starlight</strong> — credit union benefits enrollment. <strong>Propel</strong> — EBT balance management (5M+ users, potential EITC surface). <strong>Frontdoor Benefits</strong> — grocery store SNAP enrollment."},
+{id:"employer",name:"Employer HR",employer:"Small businesses, staffing agencies, home health agencies",dot:"#FFA560",tier:"Tier 3",quad:"q-tr",
+stages:[0,0,0,1,0,0,0],stageNames:["S1","S2","S3","S4","S5","S6","S7"],
+summary:"Critical for PFML (Stage 4) but low-wage employers often lack HR infrastructure entirely. Incentive exists but execution capacity is low.",
+positioning:"Employer HR is the primary touchpoint for Stage 4 (PFML and leave planning). For the parent to access PFML, the employer typically needs to be involved — processing the claim, coordinating leave, holding the position. But Maria's employer (a home health agency) likely has minimal HR. Destiny's employers (fast food and gig platform) have no HR relationship with her at all. The positioning is structurally limited by the fact that the focus population works for employers with the least HR capacity.",
+incentive:"<strong>Moderate — through retention and compliance.</strong> Employers that lose workers after childbirth face replacement costs ($4,000–$10,000 per hourly worker). PFML compliance is legally required in 13+ states. But low-wage employers often don't perceive this as a technology problem — they see it as an HR administration burden. The thesis team identifies employer-facing HR tools for PFML as an investment opportunity, with Mirza as a relevant company. The financial case is strongest for <strong>larger low-wage employers</strong> (retailers, hospital systems, warehouse operators) that process enough leave claims to justify a software investment.",
+product:"<strong>PFML eligibility and claims management tool</strong> for employers. Determines employee eligibility, walks through the claims process, coordinates with state PFML agencies, and integrates with payroll. Sold to <strong>mid-size and large low-wage employers</strong> or to <strong>PEOs/staffing agencies</strong> that manage HR for many small businesses.",
+risk:"Market is fragmented (mostly small employers). PFML exists in only 13+ states. Low-wage employers have the least budget for HR technology. The gig economy is structurally excluded.",
+flow:["Employer pays","PFML tool","HR deploys (or auto-service)","Parent served"],
+flowTypes:["dp-buyer","dp-tool","dp-nav","dp-parent"],
+companies:"<strong>Mirza</strong> — employer benefits enrollment including PFML. <strong>Humanitas</strong> — employer-focused benefits navigation."},
+{id:"govmed",name:"State Medicaid agencies",employer:"State government HHS departments",dot:"#FFA560",tier:"Tier 3",quad:"q-tr",
+stages:[0,1,0,0,0,1,1],stageNames:["S1","S2","S3","S4","S5","S6","S7"],
+summary:"Broadest reach and deepest need, but slow procurement, legacy systems, and incumbent vendors. NLV Lane 3 territory.",
+positioning:"State Medicaid agencies administer the program that covers 40% of births. They control enrollment, recertification, and the 12-month postpartum extension. They have the most comprehensive data on the population. But they don't directly interact with parents as navigators — they process applications and manage contracts with MCOs and providers. Their role is infrastructure, not navigation.",
+incentive:"<strong>Policy-driven, not revenue-driven.</strong> States face federal penalties for high error rates (Florida's 15% SNAP error rate will cost ~$1B/year starting 2027). HR1 compliance creates urgency around work requirements and recertification. Federal matching (CMS 90% for Medicaid IT) subsidizes technology investment. But procurement is dominated by legacy vendors (Deloitte serves 24 states) and risk-averse procurement officers favor incumbents. This is NLV's Lane 3 — a real opportunity but a long sales cycle requiring patient capital.",
+product:"<strong>GovTech modernization</strong> — modular solutions that improve enrollment processing, reduce error rates, and enable cross-program data sharing. Includes consent-based income verification, automated renewals, and navigator portals with real-time status visibility. Sold through <strong>state procurement</strong> (RFPs, contracts) with multi-year timelines.",
+risk:"Only 13% of government IT projects over $6M succeed. Multi-year sales cycles. Incumbent vendor lock-in. Risk-averse procurement. This is grantmaking and patient capital territory, not venture-speed deployment.",
+flow:["State Medicaid agency pays (federal match)","GovTech solution","State systems deploy","Parent served (indirectly)"],
+flowTypes:["dp-buyer","dp-tool","dp-nav","dp-parent"],
+companies:"<strong>SteadyIQ</strong> — consent-based income verification. <strong>Digital Public Works</strong> — income verification. <strong>Code for America</strong> — civic tech government capacity. <strong>Nava</strong> — government tech modernization. <strong>Exygy</strong> — government UI/UX (e.g., Arkansas UI front-end)."}
+];
+
+// Place cards in quadrants
+const quadMap = {"q-tl":"q-tl","q-tr":"q-tr","q-bl":"q-bl","q-br":"q-br"};
+navs.forEach((n,i)=>{
+  const container = document.getElementById(n.quad);
+  const card = document.createElement("div");
+  card.className = "nav-card";
+  card.id = "card-"+n.id;
+  const stagesHTML = n.stageNames.map((s,j)=>`<span class="nc-stage${n.stages[j]?' active':''}">${s}</span>`).join("");
+  card.innerHTML = `<div class="nc-header"><div class="nc-dot" style="background:${n.dot}"></div><div class="nc-name">${n.name}</div></div><div class="nc-employer">${n.employer}</div><div class="nc-stages">${stagesHTML}</div><div class="nc-summary">${n.summary}</div>`;
+  card.onclick = ()=>showDetail(n);
+  container.appendChild(card);
+});
+
+function showDetail(n){
+  document.querySelectorAll(".nav-card").forEach(c=>c.classList.remove("sel"));
+  document.getElementById("card-"+n.id).classList.add("sel");
+  const flowHTML = n.flow.map((f,i)=>`<span class="dp-node ${n.flowTypes[i]}">${f}</span>${i<n.flow.length-1?'<span class="dp-arrow">→</span>':''}`).join("");
+  const det = document.getElementById("detail");
+  det.innerHTML = `
+    <div class="det-header"><div class="det-dot" style="background:${n.dot}"></div><div class="det-name">${n.name}</div><div class="det-tier">${n.tier}</div></div>
+    <div class="det-payor"><div class="dp-label">Payor flow: who buys → what's built → who deploys → who benefits</div><div class="dp-flow">${flowHTML}</div></div>
+    <div class="det-grid">
+      <div class="det-box positioning"><div class="db-label">Why they're positioned</div><p>${n.positioning}</p></div>
+      <div class="det-box incentive"><div class="db-label">Financial incentive</div><p>${n.incentive}</p></div>
+      <div class="det-box product"><div class="db-label">Product concept</div><p>${n.product}</p></div>
+      <div class="det-box risk"><div class="db-label">Risks & barriers</div><p>${n.risk}</p></div>
+    </div>
+    <div class="det-companies"><div class="dc-label">Relevant companies from NLV field mapping</div><div class="dc-list">${n.companies}</div></div>`;
+  det.classList.add("show");
+  det.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+</script>
+</body>
+</html>
