@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Close the New Parent Benefits Gap — NextLadder Ventures Opportunity Brief</title>
+<style>
+:root{
+--nlv-white:#FFF8EF;--nlv-black:#190501;--nlv-grey:#D4C8BF;--nlv-brown:#6E2B21;
+--nlv-violet:#C2A0F1;--nlv-blue:#85DEFF;--nlv-green:#BDE998;--nlv-orange:#FFA560;--nlv-yellow:#FFE284;
+--nlv-font-body:"Inter","Helvetica Neue",Arial,sans-serif;
+--nlv-font-display:"Courier New","Courier",monospace;
+--nlv-font-mono:"JetBrains Mono","Fira Code","Courier New",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--nlv-font-body);background:var(--nlv-white);color:var(--nlv-black)}
+.top-bar{background:var(--nlv-brown);padding:14px 2rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
+.top-bar .brand{font-family:var(--nlv-font-mono);font-size:11px;color:var(--nlv-white);letter-spacing:2px;text-transform:uppercase;opacity:.8}
+.top-bar .doc-type{font-family:var(--nlv-font-mono);font-size:10px;color:var(--nlv-yellow);letter-spacing:1px;text-transform:uppercase}
+.page{max-width:800px;margin:0 auto;padding:3rem 2rem}
+h1{font-family:var(--nlv-font-display);font-size:36px;font-weight:400;color:var(--nlv-brown);line-height:1.15;margin-bottom:8px}
+h2{font-family:var(--nlv-font-display);font-size:22px;font-weight:400;color:var(--nlv-brown);margin-top:48px;margin-bottom:16px;padding-top:32px;border-top:2px solid var(--nlv-brown)}
+h3{font-family:var(--nlv-font-mono);font-size:12px;color:var(--nlv-brown);letter-spacing:1px;text-transform:uppercase;margin-top:28px;margin-bottom:10px}
+p{font-size:15px;line-height:1.8;color:var(--nlv-black);margin-bottom:18px}
+p strong{color:var(--nlv-brown)}
+.byline{font-family:var(--nlv-font-mono);font-size:12px;color:#999;margin-bottom:36px}
+.lead{font-size:17px;line-height:1.8;margin-bottom:24px}
+.sec-num{font-family:var(--nlv-font-display);font-size:14px;color:#bbb;display:block;margin-bottom:4px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0;padding:20px;background:#fff;border-radius:10px;border:1px solid var(--nlv-grey)}
+.stat{text-align:center}
+.stat .sv{font-family:var(--nlv-font-display);font-size:26px;color:var(--nlv-brown)}
+.stat .sl{font-size:11px;color:#999;margin-top:2px;line-height:1.3}
+.callout{background:var(--nlv-brown);color:var(--nlv-white);border-radius:10px;padding:24px 28px;margin:28px 0;font-size:15px;line-height:1.75}
+.callout strong{color:var(--nlv-yellow)}
+.viz-panel{background:#fff;border:1px solid var(--nlv-grey);border-radius:12px;margin:28px 0;overflow:hidden}
+.viz-header{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid var(--nlv-grey);background:#faf6ef;flex-wrap:wrap;gap:8px}
+.viz-title{font-family:var(--nlv-font-mono);font-size:11px;color:var(--nlv-brown);letter-spacing:.5px;text-transform:uppercase}
+.viz-link{font-family:var(--nlv-font-mono);font-size:11px;color:var(--nlv-brown);text-decoration:none;padding:6px 14px;border:1px solid var(--nlv-brown);border-radius:6px;transition:all .2s;white-space:nowrap}
+.viz-link:hover{background:var(--nlv-brown);color:var(--nlv-white)}
+.viz-body{padding:20px}
+.viz-caption{font-size:12px;color:#999;margin-top:12px;line-height:1.5;font-style:italic}
+.stage-strip{display:flex;gap:3px;margin-bottom:12px}
+.stage-strip .ss{flex:1;text-align:center;padding:10px 6px;border-radius:5px;background:#f0ebe4;font-family:var(--nlv-font-mono);font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.3px}
+.journey-rows{display:flex;flex-direction:column;gap:4px;margin-bottom:8px}
+.jr{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:6px;background:#faf6ef}
+.jr-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.jr-name{font-size:12px;font-weight:600;color:var(--nlv-black);flex:1}
+.jr-trigger{font-size:11px;color:#999;text-align:right}
+.jr-pills{display:flex;gap:2px;flex-shrink:0}
+.jr-pill{width:12px;height:12px;border-radius:3px;background:#e8e2da}
+.jr-pill.on{background:var(--nlv-green)}
+.jr-pill.drop{background:#fce4e0;border:1px solid #d85a30}
+.prog-grid{display:flex;flex-wrap:wrap;gap:6px}
+.pg-chip{font-family:var(--nlv-font-mono);font-size:11px;padding:6px 12px;border-radius:14px;background:#f0ebe4;color:#888}
+.pg-chip .pg-count{font-weight:700;color:var(--nlv-brown);margin-left:4px}
+.bp-summary{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:12px}
+.bp-col{text-align:center;border-radius:6px;padding:10px 4px}
+.bp-col .bp-num{font-family:var(--nlv-font-mono);font-size:9px;color:#999;text-transform:uppercase}
+.bp-col .bp-name{font-size:10px;font-weight:600;color:var(--nlv-black);margin-top:2px;line-height:1.2}
+.bp-col .bp-val{font-family:var(--nlv-font-display);font-size:14px;color:#2a5a1a;margin-top:4px}
+.bp-col.gateway .bp-val{color:#888;font-size:11px}
+.nav-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;border-radius:8px;overflow:hidden;margin-bottom:12px}
+.nq{padding:14px;font-size:12px;line-height:1.5}
+.nq-label{font-family:var(--nlv-font-mono);font-size:9px;color:#999;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.nq-names{font-weight:600;color:var(--nlv-black)}
+.nq-tl{background:#e8f5e2}.nq-tr{background:#f0ebe4}.nq-bl{background:#f4f0fa}.nq-br{background:#fef6f4}
+.tier-strip{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.ts{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:6px;font-size:13px}
+.ts-num{font-family:var(--nlv-font-display);font-size:22px;font-weight:400;width:28px;text-align:center}
+.ts-meta{flex:1}
+.ts-title{font-weight:600;color:var(--nlv-black);font-size:13px}
+.ts-detail{font-size:11px;color:#888;margin-top:1px}
+.ts-births{font-family:var(--nlv-font-mono);font-size:11px;color:#999;white-space:nowrap}
+.ts-1{background:#e8f5e2}.ts-1 .ts-num{color:#2a5a1a}
+.ts-2{background:#e8f0fa}.ts-2 .ts-num{color:#185FA5}
+.ts-3{background:#f4f0fa}.ts-3 .ts-num{color:#534AB7}
+.ts-4{background:#fce8e2}.ts-4 .ts-num{color:#993C1D}
+.cta{background:#fff;border:2px solid var(--nlv-brown);border-radius:10px;padding:28px;margin:36px 0;text-align:center}
+.cta .cta-main{font-family:var(--nlv-font-display);font-size:20px;color:var(--nlv-brown);margin-bottom:8px}
+.cta p{font-size:14px;color:#888;margin-bottom:0}
+.sources{font-size:12px;color:#aaa;line-height:1.6;margin-top:12px}
+.sources strong{color:#999;font-weight:600}
+.footer{max-width:800px;margin:0 auto;padding:24px 2rem 48px;border-top:1px solid var(--nlv-grey);font-family:var(--nlv-font-mono);font-size:10px;color:#bbb;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <span class="brand">NextLadder Ventures</span>
+  <span class="doc-type">Opportunity Brief — March 2026</span>
+</div>
+<div class="page">
+
+<!-- ======== SECTION 1: THE OPPORTUNITY (RFS) ======== -->
+
+<h1>Close the New Parent Benefits Gap</h1>
+<div class="byline">A Request for Startups from NextLadder Ventures — Benefits Access Market Exploration</div>
+
+<p class="lead">Every year, about 1.5 million low-income women give birth in the United States. At that moment, the typical family qualifies for six or more public benefit programs — WIC, Medicaid, SNAP, Paid Family Leave, the Child Tax Credit, and childcare subsidies — worth a combined <strong>$28,000 or more per year</strong>. Most families capture a fraction. The median outcome is SNAP and nothing else: roughly $5,400 a year, leaving over $22,000 on the table.</p>
+
+<div class="stats">
+<div class="stat"><div class="sv">$28K+/yr</div><div class="sl">Full benefit bundle value (on-track)</div></div>
+<div class="stat"><div class="sv">~$5K/yr</div><div class="sl">Typical capture (off-track)</div></div>
+<div class="stat"><div class="sv">~$23K/yr</div><div class="sl">Value left on the table</div></div>
+</div>
+
+<p>This isn't because the programs don't exist or the family doesn't qualify. It's because nobody tells them about the full set. The programs are run by different agencies, require different applications, and surface through different channels — or don't surface at all. A woman who enrolls in Medicaid for her pregnancy is automatically income-eligible for WIC, but <strong>4 out of 5 WIC-eligible pregnant Medicaid enrollees never receive WIC</strong>. Only 3 states allow a joint application. The systems aren't connected, the navigators are siloed, and the parent — recovering from childbirth, sleep-deprived, possibly experiencing postpartum depression — is expected to find and apply for each program on her own.</p>
+
+<p>Three things make this solvable now. First, <strong>AI can do multi-program eligibility screening in real time</strong> — the rules are complex across six programs, fifty states, and thousands of local variations, but structured rule-bound reasoning is exactly what today's models and open-source policy engines handle well. Second, <strong>there's a paying buyer</strong>. Medicaid managed care organizations lose revenue when eligible members aren't enrolled or churn off coverage. They're now contracting with community health workers and doulas through SDOH waivers to address exactly this kind of gap — California's CalAIM and New York's $7.5 billion HRSN waiver are leading examples. Hospitals have a parallel incentive: $36 billion a year in uncompensated care, much of it from uninsured deliveries that could be Medicaid-covered. Third, <strong>the policy window is open but narrowing</strong>. The 12-month postpartum Medicaid extension is now permanent. Medicaid-funded doula coverage is expanding. But HR1's new work requirements and recertification mandates are about to make benefits harder to keep — increasing the urgency for technology that simplifies access before the door gets harder to walk through.</p>
+
+<p>We don't know exactly what form the winning company takes. It might be a screening and enrollment platform sold to MCOs and deployed through their contracted navigators. It might be a hospital discharge tool that turns the birth itself — the one moment when every new parent is in a facility surrounded by professionals — into a comprehensive benefits activation event. It might be a text-based postpartum navigator that meets parents where they are during the hardest weeks of their lives. It might be infrastructure — a shared rules engine or cross-enrollment API that lets anyone build on top of it. What we're confident about is the shape of the opportunity: a triggering life event that affects 1.5 million low-income families a year, a benefit bundle worth $28,000+ that mostly goes unclaimed, institutional buyers with direct financial incentives, and a technology moment that makes real-time multi-program navigation possible for the first time.</p>
+
+<p>The founding team should include someone who has worked in Medicaid, maternal health, or benefits navigation — not because this is a policy problem, but because the buyers (MCOs, hospitals, state agencies) require understanding their workflows and incentive structures from the inside.</p>
+
+<p><strong>If you're building in this space, we want to hear from you.</strong></p>
+
+<!-- ======== SECTION 2: WHERE THIS COMES FROM ======== -->
+
+<h2><span class="sec-num">Section 2</span>Where This Comes From</h2>
+
+<h3>From mobility experiences to trigger-based journeys</h3>
+
+<p>This opportunity brief emerges from NLV's Benefits Access market exploration, which builds on the Camber Collective / Bill & Melinda Gates Foundation Mobility Experiences research (2024). That research identified 28 "mobility experiences" — life events that, according to evidence, demonstrably affect an individual's economic situation over time — and estimated their impact on lifetime earnings. One of those experiences was "Accessing public benefits and programs," estimated at a 6% mean impact on lifetime earnings across 4 academic studies.</p>
+
+<p>That finding told NLV that benefits access matters for economic mobility. But it was a single line item among 28 experiences. It didn't tell us <em>how</em> people actually encounter the benefits system, where they fail in the process, what infrastructure is missing, or what to build. The Camber research describes <strong>what</strong> matters. NLV's journey work describes <strong>how it happens</strong>.</p>
+
+<p>The key insight was that people don't wake up one morning and decide to "access public benefits." They experience a life event — they lose a job, have a baby, develop a disability, face eviction, leave incarceration — and that event triggers a need for benefits they may not have known about. NLV translated the Camber mobility experience into a set of <strong>trigger-event-based journeys</strong> that model how real people actually come to need benefits: which programs activate for each trigger, where people fall off the navigation process, who is available to help, and where technology could intervene. The eight journeys below aren't eight separate problems — they're eight entry points into a shared navigation process (Discovery → Eligibility → Application → Processing → Enrollment → Maintenance), each entering from a different life circumstance.</p>
+
+<!-- Visual 1 Summary: Journey Matrix -->
+<div class="viz-panel">
+  <div class="viz-header">
+    <span class="viz-title">Benefits access journey matrix — 8 journeys by triggering life event</span>
+    <a class="viz-link" href="benefits_access_journey_matrix.html" target="_blank">Open interactive ↗</a>
+  </div>
+  <div class="viz-body">
+    <div class="stage-strip">
+      <div class="ss">Discovery</div><div class="ss">Eligibility</div><div class="ss">Application</div><div class="ss">Processing</div><div class="ss">Enrollment</div><div class="ss">Maintenance</div>
+    </div>
+    <div class="journey-rows">
+      <div class="jr"><div class="jr-dot" style="background:#993C1D"></div><div class="jr-name">Benefits after job loss</div><div class="jr-trigger">Unexpected unemployment</div><div class="jr-pills"><div class="jr-pill on"></div><div class="jr-pill on"></div><div class="jr-pill on drop"></div><div class="jr-pill on"></div><div class="jr-pill on"></div><div class="jr-pill"></div></div></div>
+      <div class="jr" style="background:#fdf2f0;border:1.5px solid #993556"><div class="jr-dot" style="background:#993556"></div><div class="jr-name">Benefits for new parents</div><div class="jr-trigger">Pregnancy or birth</div><div class="jr-pills"><div class="jr-pill on drop"></div><div class="jr-pill on"></div><div class="jr-pill on"></div><div class="jr-pill on"></div><div class="jr-pill on"></div><div class="jr-pill on"></div></div></div>
+      <div class="jr"><div class="jr-dot" style="background:#534AB7"></div><div class="jr-name">Benefits for disability / chronic illness</div><div class="jr-trigger">New disability or condition</div><div class="jr-pills"><div class="jr-pill on"></div><div class="jr-pill on"></div><div class="jr-pill on"></div><div class="jr-pill on drop"></div><div class="jr-pill on"></div><div class="jr-pill on"></div></div></div>
+      <div class="jr"><div class="jr-dot" style="background:#185FA5"></div><div class="jr-name">Benefits during housing crisis</div><div class="jr-trigger">Eviction or housing loss</div><div class="jr-pills"><div class="jr-pill on"></div><div class="jr-pill on drop"></div><div class="jr-pill on"></div><div class="jr-pill on"></div><div class="jr-pill on"></div><div class="jr-pill"></div></div></div>
+      <div class="jr"><div class="jr-dot" style="background:#D85A30"></div><div class="jr-name">Benefits after incarceration</div><div class="jr-trigger">Release from incarceration</div><div class="jr-pills"><div class="jr-pill on"></div><div class="jr-pill on drop"></div><div class="jr-pill on"></div><div class="jr-pill on"></div><div class="jr-pill on"></div><div class="jr-pill on"></div></div></div>
+      <div class="jr"><div class="jr-dot" style="background:#0F6E56"></div><div class="jr-name">Cross-enrollment & optimization</div><div class="jr-trigger">Already in one program</div><div class="jr-pills"><div class="jr-pill on drop"></div><div class="jr-pill on"></div><div class="jr-pill on"></div><div class="jr-pill"></div><div class="jr-pill on"></div><div class="jr-pill"></div></div></div>
+      <div class="jr"><div class="jr-dot" style="background:#888780"></div><div class="jr-name">Benefits maintenance & retention</div><div class="jr-trigger">Renewal deadline</div><div class="jr-pills"><div class="jr-pill"></div><div class="jr-pill"></div><div class="jr-pill"></div><div class="jr-pill on"></div><div class="jr-pill"></div><div class="jr-pill on drop"></div></div></div>
+      <div class="jr"><div class="jr-dot" style="background:#BA7517"></div><div class="jr-name">Tax credit access for working families</div><div class="jr-trigger">Tax filing season</div><div class="jr-pills"><div class="jr-pill on"></div><div class="jr-pill on"></div><div class="jr-pill on drop"></div><div class="jr-pill"></div><div class="jr-pill on"></div><div class="jr-pill"></div></div></div>
+    </div>
+    <div class="viz-caption">Each row is a journey triggered by a life event. Colored pills show which stages activate; outlined pills mark the biggest drop-off risk. The new parent journey (highlighted) activates all 6 stages and has the widest benefit bundle. The shared infrastructure layer — rules engines, application AI, navigator tools — serves all journeys simultaneously.</div>
+  </div>
+</div>
+
+<p>The programs themselves cut across journeys. SNAP appears in 5 of 8 journeys. Medicaid spans 4. The shared infrastructure layer serves all journeys simultaneously — this is why solving for one journey builds tools that serve others.</p>
+
+<!-- Visual 2 Summary: Program Crosswalk -->
+<div class="viz-panel">
+  <div class="viz-header">
+    <span class="viz-title">Benefits program crosswalk — programs across journeys</span>
+    <a class="viz-link" href="benefits_program_crosswalk.html" target="_blank">Open interactive ↗</a>
+  </div>
+  <div class="viz-body">
+    <div class="prog-grid">
+      <div class="pg-chip">SNAP<span class="pg-count">5 journeys</span></div>
+      <div class="pg-chip">Medicaid<span class="pg-count">4 journeys</span></div>
+      <div class="pg-chip">WIC<span class="pg-count">3 journeys</span></div>
+      <div class="pg-chip">EITC<span class="pg-count">3 journeys</span></div>
+      <div class="pg-chip">CTC<span class="pg-count">3 journeys</span></div>
+      <div class="pg-chip">SSDI/SSI<span class="pg-count">3 journeys</span></div>
+      <div class="pg-chip">Housing vouchers<span class="pg-count">3 journeys</span></div>
+      <div class="pg-chip">UI<span class="pg-count">2 journeys</span></div>
+      <div class="pg-chip">PFML<span class="pg-count">2 journeys</span></div>
+      <div class="pg-chip">Childcare subsidy<span class="pg-count">2 journeys</span></div>
+    </div>
+    <div class="viz-caption">A rules engine covering SNAP, Medicaid, and WIC covers the three highest-volume programs and serves the new parent, job loss, disability, housing, and cross-enrollment journeys simultaneously. Building infrastructure for one journey creates tools that serve others.</div>
+  </div>
+</div>
+
+<h3>Why the new parent journey</h3>
+
+<p>From these eight journeys, NLV selected the new parent journey for deep analysis based on several converging factors: <strong>scale</strong> (approximately 1.46 million Medicaid-covered births per year); <strong>benefit bundle density</strong> (six programs activated simultaneously, more than any other journey); <strong>payor alignment</strong> (Medicaid MCOs have a direct financial incentive); <strong>concentrated timing</strong> (pregnancy through year one is a defined window); and the fact that <strong>the parent is already in the healthcare system</strong>, reducing the cost-to-reach. This journey also intersects multiple Camber mobility experiences: "accessing pre- and post-natal care" (6% mean impact), "not having to provide unpaid care for children" (5%), and "accessing non-wage employment-based benefits" (7%) — making it a convergence point for several mobility experiences, not just one.</p>
+
+<!-- ======== SECTION 3: THE JOURNEY ======== -->
+
+<h2><span class="sec-num">Section 3</span>The Journey — What Actually Happens</h2>
+
+<p>The service blueprint below maps the new parent benefits journey across seven stages, from pregnancy confirmation through the child's first year. Each stage shows the parent's experience, the navigator ecosystem (who helps and who employs them), the systems infrastructure, drop-off risks, NavTech opportunities, and the dollar value at stake — all for a reference household modeled on NLV's Maria persona (single parent, two children, $28K income, ~150% FPL).</p>
+
+<!-- Visual 3 Summary: Blueprint -->
+<div class="viz-panel">
+  <div class="viz-header">
+    <span class="viz-title">Service blueprint — 7 stages with financial quantification</span>
+    <a class="viz-link" href="new_parent_benefits_service_blueprint_v2.html" target="_blank">Open interactive ↗</a>
+  </div>
+  <div class="viz-body">
+    <div class="bp-summary">
+      <div class="bp-col" style="background:#fdf2f0"><div class="bp-num">S1</div><div class="bp-name">Pregnancy confirm</div><div class="bp-val gateway">Gateway</div></div>
+      <div class="bp-col" style="background:#f0f7ec"><div class="bp-num">S2</div><div class="bp-name">Medicaid enrollment</div><div class="bp-val">$6K/yr</div></div>
+      <div class="bp-col" style="background:#f0f7ec"><div class="bp-num">S3</div><div class="bp-name">WIC certification</div><div class="bp-val">$2.4K/yr</div></div>
+      <div class="bp-col" style="background:#fef8e6"><div class="bp-num">S4</div><div class="bp-name">PFML & leave</div><div class="bp-val">$3.5K*</div></div>
+      <div class="bp-col" style="background:#fdf2f0"><div class="bp-num">S5</div><div class="bp-name">Hospital discharge</div><div class="bp-val gateway">Gateway</div></div>
+      <div class="bp-col" style="background:#f0f7ec"><div class="bp-num">S6</div><div class="bp-name">Postpartum activation</div><div class="bp-val">$9.6K/yr</div></div>
+      <div class="bp-col" style="background:#f0f7ec"><div class="bp-num">S7</div><div class="bp-name">Maintain & tax file</div><div class="bp-val">$21K+/yr</div></div>
+    </div>
+    <div style="display:flex;gap:16px;margin:16px 0">
+      <div style="flex:1;background:#e8f5e2;border-radius:8px;padding:14px;text-align:center">
+        <div style="font-family:var(--nlv-font-display);font-size:24px;color:#2a5a1a">$28.4K/yr</div>
+        <div style="font-size:11px;color:#2a5a1a;margin-top:2px">On-track cumulative (all benefits captured)</div>
+      </div>
+      <div style="flex:1;background:#fce8e2;border-radius:8px;padding:14px;text-align:center">
+        <div style="font-family:var(--nlv-font-display);font-size:24px;color:#993C1D">$5.4K/yr</div>
+        <div style="font-size:11px;color:#993C1D;margin-top:2px">Off-track (SNAP only — typical outcome)</div>
+      </div>
+    </div>
+    <div class="viz-caption">Each stage in the full interactive blueprint contains six lanes: value at stake, parent experience, navigators and who employs them, systems infrastructure, drop-off risks, and NavTech opportunities. The two gateway stages (S1 and S5) don't add direct benefit dollars but determine whether downstream enrollment happens. Stage 5 (hospital discharge) is the single highest-leverage intervention point — the parent is in a facility for 1–4 days, yet leaves without a single new enrollment in most cases. *PFML value is conditional on state availability.</div>
+  </div>
+</div>
+
+<!-- ======== SECTION 4: WHO CAN DELIVER ======== -->
+
+<h2><span class="sec-num">Section 4</span>Who Can Deliver — The Navigator and Payor Landscape</h2>
+
+<p>A startup needs to know <strong>who is positioned to improve outcomes</strong> and <strong>who has a financial incentive to pay for that improvement</strong>. These are often not the same entity. The home visitor who enters a parent's home is excellently positioned but grant-funded. The MCO that loses revenue when a member churns has a strong financial incentive but doesn't directly touch the parent. The most viable path runs through the institution that employs or contracts with the navigator — not the navigator on the front line.</p>
+
+<!-- Visual 4 Summary: Navigator-Payor -->
+<div class="viz-panel">
+  <div class="viz-header">
+    <span class="viz-title">Navigator–payor alignment map — who's positioned × who pays</span>
+    <a class="viz-link" href="navigator_payor_analysis.html" target="_blank">Open interactive ↗</a>
+  </div>
+  <div class="viz-body">
+    <div style="text-align:center;font-family:var(--nlv-font-mono);font-size:10px;color:#999;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">↑ Better positioned to screen and enroll</div>
+    <div class="nav-grid">
+      <div class="nq nq-tl"><div class="nq-label">Positioned + incentivized = Build here</div><div class="nq-names">Medicaid MCOs · Hospital systems · FQHCs</div><div style="font-size:11px;color:#555;margin-top:4px">Direct revenue tied to enrollment. MCOs lose capitation when members churn. Hospitals absorb $36B/yr in uncompensated care. FQHCs get enhanced Medicaid reimbursement.</div></div>
+      <div class="nq nq-tr"><div class="nq-label">Incentivized but less positioned</div><div class="nq-names">Employer HR · State Medicaid agencies</div><div style="font-size:11px;color:#555;margin-top:4px">Have money or can access it, but limited direct contact with the parent or slow procurement.</div></div>
+      <div class="nq nq-bl"><div class="nq-label">Positioned but needs a payor</div><div class="nq-names">Home visitors · Birth doulas · Pediatric offices · WIC counselors</div><div style="font-size:11px;color:#555;margin-top:4px">Best navigators in the ecosystem but grant-funded or government-run. Path runs through MCOs or state agencies that contract with them.</div></div>
+      <div class="nq nq-br"><div class="nq-label">Narrow positioning + weak incentive</div><div class="nq-names">OB/GYN front desk · VITA sites / CCR&Rs</div><div style="font-size:11px;color:#555;margin-top:4px">Important for the ecosystem but hard to build a business around selling to them directly.</div></div>
+    </div>
+    <div style="text-align:center;font-family:var(--nlv-font-mono);font-size:10px;color:#999;margin-top:8px;text-transform:uppercase;letter-spacing:.5px">Weaker financial incentive ←→ Stronger financial incentive</div>
+    <div class="viz-caption">The full interactive includes payor flow diagrams for each of 11 navigators — showing the chain from who buys the tool → what gets built → who deploys it → who benefits. Companies from NLV's field mapping (Pair Team, Zocalo Health, Mirza, Starlight, and others) are mapped to each channel.</div>
+  </div>
+</div>
+
+<!-- ======== SECTION 5: WHERE TO START ======== -->
+
+<h2><span class="sec-num">Section 5</span>Where to Start — The State Policy Landscape</h2>
+
+<p>Six policy dimensions determine how much of the $28K+ bundle is accessible in a given state and how viable it is to build a business there: Medicaid expansion, 12-month postpartum extension, state PFML, Medicaid SDOH/HRSN waivers, managed care penetration, and state-level tax credits. The combination creates four tiers — and a striking tension: <strong>roughly equal shares of Medicaid-covered births happen in the easiest and hardest tiers</strong>.</p>
+
+<!-- Visual 5 Summary: State Tiering -->
+<div class="viz-panel">
+  <div class="viz-header">
+    <span class="viz-title">State policy landscape — 4 tiers across 6 policy dimensions</span>
+    <a class="viz-link" href="state_tiering_new_parent_benefits.html" target="_blank">Open interactive ↗</a>
+  </div>
+  <div class="viz-body">
+    <div class="tier-strip">
+      <div class="ts ts-1"><div class="ts-num">1</div><div class="ts-meta"><div class="ts-title">Launch here — full bundle + payor infrastructure</div><div class="ts-detail">CA, NY, MA, NJ, CT, WA, CO, OR, MN</div></div><div class="ts-births">~350–400K births · 25–27%</div></div>
+      <div class="ts ts-2"><div class="ts-num">2</div><div class="ts-meta"><div class="ts-title">Strong fundamentals — missing PFML or SDOH waivers</div><div class="ts-detail">IL, MI, PA, NC, OH, VA, MD, IN, GA, AZ, DE, RI</div></div><div class="ts-births">~400–450K births · 27–30%</div></div>
+      <div class="ts ts-3"><div class="ts-num">3</div><div class="ts-meta"><div class="ts-title">High need, thin infrastructure</div><div class="ts-detail">LA, KY, WV, NM, MT, ID, SD, MO, OK, NE</div></div><div class="ts-births">~150–200K births · 10–14%</div></div>
+      <div class="ts ts-4"><div class="ts-num">4</div><div class="ts-meta"><div class="ts-title">Hardest environment — non-expansion, no PFML</div><div class="ts-detail">TX, FL, MS, AL, SC, TN, KS, WY, WI, AR</div></div><div class="ts-births">~400–450K births · 27–31%</div></div>
+    </div>
+    <div class="viz-caption">Texas alone accounts for ~150K+ Medicaid births/year and 42% of the national coverage gap. A startup should launch in Tier 1 (California or New York), expand to Tier 2, and consider different models for Tier 3–4 states where the business infrastructure doesn't yet exist. The full interactive shows each state's profile across all six dimensions.</div>
+  </div>
+</div>
+
+<!-- ======== SECTION 6: WHY THIS ADVANCES THE THESIS ======== -->
+
+<h2><span class="sec-num">Section 6</span>Why This Journey Advances the Broader Thesis</h2>
+
+<p>NLV's benefits access market thesis has North Star goals that are deliberately program-agnostic and journey-agnostic. The vision is a world where eligible individuals receive proactive outreach, experience frictionless enrollment, and can effectively use the benefits they receive. The three investment lanes — navigator enablement and self-service tools, shared infrastructure, and government vendor disruption — are designed to work across all programs and all journeys. The question is whether going deep on one specific journey advances those broader goals. It does — because the new parent journey is the best available proving ground for all three lanes.</p>
+
+<p><strong>On Lane 1 (navigator enablement and application assistance):</strong> The thesis's central challenge is that high-quality application assistance is expensive and "there are not any payers that can cover the cost at scale." The new parent journey provides the clearest answer to this payor question. MCOs have a direct, capitation-based financial incentive to keep pregnant and postpartum members enrolled. In SDOH-waiver states, they're already contracting with community health workers and doulas — meaning the payor channel exists. And because the parent is already in the healthcare system, the cost-to-reach is dramatically lower than for populations who aren't in any system. A startup that proves it can screen new parents and get paid by MCOs has validated a payor model that extends to any population those MCOs serve.</p>
+
+<p><strong>On Lane 2 (shared infrastructure):</strong> The Medicaid-to-WIC cross-enrollment failure (4 in 5 eligible pregnant enrollees miss WIC) is the single most concrete proof point that cross-program data sharing doesn't exist. A rules engine built for the new parent bundle would cover SNAP, Medicaid, and WIC — three of the four highest-volume programs nationally — creating infrastructure that serves every other journey too.</p>
+
+<p><strong>On Lane 3 (government vendor disruption):</strong> Income verification barriers at Medicaid enrollment, recertification churn where still-eligible mothers lose benefits to missed paperwork, and the underuse of presumptive eligibility in 45+ states are all direct instances of the gaps that agile GovTech vendors could address.</p>
+
+<div class="callout">
+<strong>The beachhead argument:</strong> A company that masters benefits navigation for new parents has the technology (multi-program screening), the payor relationships (MCOs, hospitals), and the operational playbook (navigator deployment through CHWs and doulas) to expand to other journeys — job loss, disability onset, post-incarceration — where the same infrastructure applies but the population is harder to reach and the payor model is less developed. The new parent journey doesn't narrow the thesis. It sharpens it.
+</div>
+
+<!-- ======== SECTION 7: SOURCES ======== -->
+
+<h2><span class="sec-num">Section 7</span>Sources and Methodology</h2>
+
+<div class="sources">
+<p><strong>Research foundations:</strong> Camber Collective / Bill & Melinda Gates Foundation, Mobility Experiences Research Series Part 1: Life Experiences that Power Lifetime Income (March 2024). NLV Benefits Access Market Exploration (2026), including the Early Thinking Writeup, the Working Document for Problem and Opportunity Areas, and the Benefits Access Field Mapping. NLV Low-Income Population Memo (February 2026). NLV Journey Development documents: Criminal Justice Interaction Journeys, Employment After Conviction Deep Dive, Career Progression Journeys, Financial Well-Being Journeys.</p>
+
+<p><strong>Birth and demographic data:</strong> National Center for Health Statistics, Births: Final Data for 2024 (NCHS Data Brief No. 535, July 2025); Births: Provisional Data for 2024 (VSRR Report No. 38, April 2025). CDC WONDER Natality Database.</p>
+
+<p><strong>Benefits participation data:</strong> USDA Food and Nutrition Service, National and State Level Estimates of WIC Eligibility and Program Reach (2021, 2022). Center on Budget and Policy Priorities, WIC coverage analysis (2024). IRS EITC/CTC benefit tables (2024). USDA SNAP benefit tables.</p>
+
+<p><strong>Medicaid and state policy data:</strong> KFF Medicaid Postpartum Coverage Extension Tracker (2026). KFF Status of State Medicaid Expansion Decisions (2026). Georgetown University Center for Children and Families. CMS 1115 Waiver Tracker. American Hospital Association Medicaid Fact Sheet (2026).</p>
+
+<p><strong>Paid leave data:</strong> New America Better Life Lab, Paid Leave Programs in the United States (January 2026). The Standard, Status of Paid Family Leave Laws in Each State.</p>
+
+<p><strong>Financial quantification:</strong> All dollar figures represent annualized benefit values for a reference household: single parent, two children, ~$28K income, ~150% FPL (Maria persona from NLV's Low-Income Population Memo). Conditional benefits (PFML) noted. State tiering reflects policy status as of March 2026.</p>
+</div>
+
+<div class="cta">
+  <div class="cta-main">Building in this space?</div>
+  <p>If you're working on benefits navigation, maternal health technology, cross-program enrollment, or navigator enablement tools — we want to hear from you.</p>
+</div>
+
+</div><!-- close .page -->
+
+<div class="footer">
+<span>NextLadder Ventures — Benefits Access Market Exploration</span>
+<span>Draft — March 2026</span>
+</div>
+
+</body>
+</html>
