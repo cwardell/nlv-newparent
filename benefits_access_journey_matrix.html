@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benefits Access Journey Matrix — NextLadder Ventures</title>
+<style>
+:root{
+--nlv-white:#FFF8EF;--nlv-black:#190501;--nlv-grey:#D4C8BF;--nlv-brown:#6E2B21;
+--nlv-violet:#C2A0F1;--nlv-blue:#85DEFF;--nlv-green:#BDE998;--nlv-orange:#FFA560;--nlv-yellow:#FFE284;
+--nlv-font-body:"Inter","Helvetica Neue",Arial,sans-serif;
+--nlv-font-display:"Courier New","Courier",monospace;
+--nlv-font-mono:"JetBrains Mono","Fira Code","Courier New",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--nlv-font-body);background:var(--nlv-white);color:var(--nlv-black);padding:2rem;max-width:900px;margin:0 auto}
+h1{font-family:var(--nlv-font-display);font-size:28px;font-weight:400;color:var(--nlv-brown);margin-bottom:4px}
+.subtitle{font-size:14px;color:#888;margin-bottom:8px}
+.branding{font-family:var(--nlv-font-mono);font-size:11px;color:var(--nlv-brown);letter-spacing:1px;text-transform:uppercase;margin-bottom:24px;padding-bottom:12px;border-bottom:2px solid var(--nlv-brown)}
+.desc{font-size:14px;color:#666;line-height:1.6;margin-bottom:24px}
+.stages{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;margin-bottom:24px}
+.stage{text-align:center;padding:14px 6px;border-radius:6px;background:#f0ebe4;transition:background .3s,transform .25s}
+.stage .sn{font-family:var(--nlv-font-mono);font-size:11px;font-weight:500;color:#888;text-transform:uppercase;letter-spacing:.5px}
+.stage .sd{font-size:11px;color:#aaa;margin-top:3px}
+.stage.active{background:#d4eddf;transform:scale(1.04)}
+.stage.active .sn{color:#085041}
+.stage.active .sd{color:#0F6E56}
+.stage.drop{background:#fce4e0}
+.stage.drop .sn{color:#712B13}
+.stage.drop .sd{color:#993C1D}
+.section-label{font-family:var(--nlv-font-mono);font-size:11px;color:var(--nlv-brown);letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px}
+.triggers{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+.trig{display:flex;align-items:stretch;gap:10px;cursor:pointer;border-radius:8px;padding:12px 14px;border:1px solid var(--nlv-grey);transition:all .25s;background:#fff}
+.trig:hover{border-color:#aaa;background:#faf6ef}
+.trig.sel{border-color:var(--nlv-brown);background:var(--nlv-white);box-shadow:0 0 0 1px var(--nlv-brown)}
+.trig .dot{width:6px;min-height:100%;border-radius:3px;flex-shrink:0}
+.trig .tc{flex:1;min-width:0}
+.trig .tn{font-size:14px;font-weight:600;color:var(--nlv-black)}
+.trig .tt{font-size:12px;color:#888;margin-top:2px}
+.trig .pills{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.trig .pill{font-family:var(--nlv-font-mono);font-size:10px;padding:3px 10px;border-radius:12px;background:#f0ebe4;color:#999;transition:all .25s}
+.trig.sel .pill.on{background:var(--nlv-brown);color:var(--nlv-white)}
+.meta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.mc{background:#f0ebe4;border-radius:8px;padding:14px}
+.mc .ml{font-family:var(--nlv-font-mono);font-size:10px;color:#999;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.mc .mv{font-size:14px;font-weight:500;color:var(--nlv-black)}
+.infra{margin-top:24px;padding:16px;border:1px dashed var(--nlv-grey);border-radius:8px}
+.infra .il{font-family:var(--nlv-font-mono);font-size:11px;color:var(--nlv-brown);letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px}
+.infra .ig{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.infra .ib{font-size:12px;padding:10px;border-radius:6px;background:#f0ebe4;color:#777;text-align:center}
+.overview{display:none;margin-bottom:20px;padding:16px 18px;border-radius:8px;background:rgba(110,43,33,0.04);border-left:3px solid var(--nlv-brown)}
+.overview.visible{display:block}
+.overview .otitle{font-size:15px;font-weight:600;color:var(--nlv-brown);margin-bottom:6px}
+.overview .otext{font-size:13px;color:#555;line-height:1.7}
+.note{font-size:12px;color:#aaa;margin-top:20px;line-height:1.5;font-style:italic;border-top:1px solid var(--nlv-grey);padding-top:16px}
+.footer{margin-top:24px;padding-top:12px;border-top:1px solid var(--nlv-grey);font-family:var(--nlv-font-mono);font-size:10px;color:#bbb;display:flex;justify-content:space-between}
+</style>
+</head>
+<body>
+<div class="branding">NextLadder Ventures — Economic Mobility Journey Framework</div>
+<h1>Public benefits access: journey matrix</h1>
+<p class="subtitle">Accessing public benefits and programs — 6% mean impact on lifetime earnings</p>
+<p class="desc">Triggering life events enter from the left. Each journey flows through a shared navigation process (top). Click a journey to see which stages activate and where people most commonly fall off.</p>
+
+<div class="section-label">Shared navigation process</div>
+<div class="stages" id="stages">
+<div class="stage" id="s0"><div class="sn">Discovery</div><div class="sd">Learn benefits exist</div></div>
+<div class="stage" id="s1"><div class="sn">Eligibility</div><div class="sd">Determine if qualified</div></div>
+<div class="stage" id="s2"><div class="sn">Application</div><div class="sd">Complete and submit</div></div>
+<div class="stage" id="s3"><div class="sn">Processing</div><div class="sd">Agency reviews</div></div>
+<div class="stage" id="s4"><div class="sn">Enrollment</div><div class="sd">Begin receiving</div></div>
+<div class="stage" id="s5"><div class="sn">Maintenance</div><div class="sd">Recertify, retain</div></div>
+</div>
+
+<div class="section-label">Journeys by triggering life event</div>
+<div class="triggers" id="triggers"></div>
+
+<div class="overview" id="overview">
+<div class="otitle" id="oTitle"></div>
+<div class="otext" id="oText"></div>
+</div>
+
+<div class="meta" id="meta" style="display:none">
+<div class="mc"><div class="ml">Primary benefits</div><div class="mv" id="mBenefits">—</div></div>
+<div class="mc"><div class="ml">Biggest drop-off risk</div><div class="mv" id="mDrop">—</div></div>
+<div class="mc"><div class="ml">Key navigator</div><div class="mv" id="mNav">—</div></div>
+<div class="mc"><div class="ml">Mobility experience link</div><div class="mv" id="mLink">—</div></div>
+</div>
+
+<div class="infra">
+<div class="il">Shared infrastructure layer (cuts across all journeys)</div>
+<div class="ig">
+<div class="ib">Rules engines and eligibility APIs</div>
+<div class="ib">Application assistance AI</div>
+<div class="ib">Navigator support tools</div>
+<div class="ib">Gov't processing capacity</div>
+<div class="ib">Closed-loop referrals</div>
+<div class="ib">Resource directories</div>
+</div>
+</div>
+
+<p class="note">Unlike criminal justice journeys (hierarchical, cascading triggers), benefits journeys share a common horizontal process but enter from different life events. The infrastructure layer serves all journeys simultaneously — this is where NLV's benefits access market thesis investments operate. Journeys are not mutually exclusive; an individual may be on multiple journeys simultaneously (e.g., job loss triggering both UI and SNAP, while also needing cross-enrollment into Medicaid).</p>
+
+<div class="footer">
+<span>Source: Mobility Experiences Research (Camber Collective, 2024) | NLV Benefits Access Market Exploration (2026)</span>
+<span>Draft — March 2026</span>
+</div>
+
+<script>
+const data=[
+{name:"Job loss",color:"#993C1D",trigger:"Unexpected unemployment",journey:"Benefits after job loss",stages:[1,1,1,1,1,0],drop:2,benefits:"UI, SNAP, Medicaid, COBRA/ACA",dropText:"Application — complexity during crisis, multiple programs simultaneously",nav:"Workforce center staff, UI specialists",link:"Avoiding involuntary unemployment (19% mean impact)",
+overview:"Following an unexpected job loss, can we support someone to quickly access UI, SNAP, Medicaid, and other safety-net programs before the financial cascade becomes unrecoverable? The triggering event is acute and time-sensitive — UI has filing deadlines, SNAP applications must be processed within 30 days, and Medicaid coverage gaps can be immediate. The Mobility Experiences research found that avoiding involuntary unemployment has a 19% mean impact on lifetime earnings, and unemployment insurance benefits improve job-match quality by 14.4%."},
+{name:"New parent",color:"#993556",trigger:"Pregnancy or birth of child",journey:"Benefits for new parents",stages:[1,1,1,1,1,1],drop:0,benefits:"WIC, Medicaid, PFML, CTC, SNAP, childcare subsidy",dropText:"Discovery — many don't know the full set of programs available to them",nav:"OB/GYN office navigators, home visitors, community health workers",link:"Pre- and post-natal care (6%), unpaid childcare (5%)",
+overview:"Following a pregnancy or birth, can we support a family to access WIC, Medicaid (for mother and child), SNAP, paid family/medical leave, CTC/EITC, and childcare subsidies? This is a journey where the triggering event is predictable (unlike job loss) but the benefits landscape is fragmented across federal, state, and local programs with different eligibility rules, application processes, and timelines. The Mobility Experiences research connects this to pre- and post-natal care (6% mean impact on lifetime earnings) and not having to provide unpaid care for children (5% mean impact)."},
+{name:"Disability onset",color:"#534AB7",trigger:"New disability or chronic condition",journey:"Benefits for disability / chronic illness",stages:[1,1,1,1,1,1],drop:3,benefits:"SSDI, SSI, Medicaid, SNAP",dropText:"Processing — SSDI approval takes months to years; ~30% initial approval rate",nav:"Disability rights attorneys, patient advocates, legal aid",link:"Accessing care for health conditions (13% mean impact)",
+overview:"Following the onset of a disability or chronic condition, can we support someone to access SSDI, SSI, Medicaid, and related programs? This is the most complex application journey — SSDI approval rates are low (around 30% at initial application), the process can take months to years, and many people need specialized legal navigators for appeals. The Mobility Experiences research found that accessing care for mental and physical health conditions has a 13% mean impact on lifetime earnings."},
+{name:"Housing crisis",color:"#185FA5",trigger:"Eviction, rent shock, or loss of housing",journey:"Benefits during housing crisis",stages:[1,1,1,1,1,0],drop:1,benefits:"Emergency rental assistance, housing vouchers, SNAP, utility aid",dropText:"Eligibility — fragmented programs with different rules across jurisdictions",nav:"Housing counselors (HUD-certified), legal aid, 211 networks",link:"Stable affordable housing (8% mean impact)",
+overview:"Following an eviction notice, loss of housing, or housing cost shock, can we support someone to access emergency rental assistance, housing vouchers, SNAP, utility assistance, and transitional housing programs? This journey intersects directly with the housing stabilization journey in the criminal justice interaction map — for people with records, both journeys activate simultaneously. The Mobility Experiences research found that accessing stable, affordable housing has an 8% mean impact on lifetime earnings."},
+{name:"Post-incarceration",color:"#D85A30",trigger:"Release from incarceration",journey:"Benefits after criminal justice involvement",stages:[1,1,1,1,1,1],drop:1,benefits:"SNAP (if eligible), Medicaid, emergency assistance",dropText:"Eligibility — felony conviction restrictions vary by state; 20+ states restrict SNAP for drug felonies",nav:"Reentry case managers, parole/probation officers",link:"Avoiding CJ system interactions (10% mean impact)",
+overview:"Following a felony conviction or release from incarceration, can we help someone navigate eligibility for and enrollment in public benefits — particularly SNAP, TANF, Medicaid, and other safety-net programs — given that over 20 states still restrict SNAP access for drug felony convictions, 91% of people released from prison experience food insecurity, and access to SNAP/TANF has been shown to reduce recidivism by up to 10%? This is a journey where the interaction with the criminal justice system creates a second, bureaucratic interaction that compounds harm."},
+{name:"Cross-enrollment",color:"#0F6E56",trigger:"Already enrolled in one program",journey:"Cross-enrollment and benefits optimization",stages:[1,1,1,0,1,0],drop:0,benefits:"All additional programs the individual qualifies for",dropText:"Discovery — 74% of low-income households have a civil legal problem, 92% receive inadequate help",nav:"Benefits screeners, case managers, AI screening tools",link:"Accessing public benefits (6% mean impact)",
+overview:"Following enrollment in one program, can we support someone to identify and access the full set of additional programs they are likely eligible for — rather than navigating each benefit in isolation? Research shows that 74% of low-income households experience at least one civil legal problem annually, yet 92% receive inadequate or no help. People typically discover benefits through one channel but qualify for many more. Cross-enrollment is a journey that activates within any of the other journeys and represents one of the highest-leverage opportunities for NavTech."},
+{name:"Recertification",color:"#888780",trigger:"Approaching renewal deadline",journey:"Benefits maintenance and retention",stages:[0,0,0,1,0,1],drop:5,benefits:"All currently enrolled programs at risk of churn",dropText:"Maintenance — majority of CA SNAP exits are still-eligible people lost to admin burden",nav:"Automated renewal systems, case managers, nudge tools",link:"Accessing public benefits (6% mean impact)",
+overview:"Following initial enrollment, can we support someone to maintain their benefits through recertification cycles, income changes, and life transitions — preventing the 'churn' where eligible people lose benefits due to administrative burden rather than actual ineligibility? NLV's own research notes that in California, the majority of people leaving SNAP were still eligible upon exit. This is a quiet journey — there is no dramatic triggering event — but the cumulative cost of benefits churn is enormous. States have begun implementing automatic renewals using existing data, but most beneficiaries still face manual recertification processes that mirror the complexity of initial applications."},
+{name:"Tax season",color:"#BA7517",trigger:"End of tax year / filing season",journey:"Tax credit access for working families",stages:[1,1,1,0,1,0],drop:2,benefits:"EITC (up to $7,430), CTC, state-level credits",dropText:"Application — embedded in tax filing process; VITA capacity is limited",nav:"VITA volunteers, tax preparers, fintech tools",link:"Financial inclusion (8% mean impact)",
+overview:"Following a tax year, can we support eligible families to claim EITC, CTC, and state-level tax credits they are entitled to? This is a distinct journey because the 'application' is embedded in the tax filing process rather than a traditional benefits application, the navigators are different (VITA sites, tax preparers rather than social workers), and the dollar amounts can be transformative — EITC alone can be worth up to $7,430. NLV's benefits access work already identifies tax credits as a priority benefit category alongside SNAP, Medicaid, and SSDI."}
+];
+
+const el=document.getElementById('triggers');
+let sel=-1;
+const pillNames=['Discovery','Eligibility','Application','Processing','Enrollment','Maintenance'];
+
+data.forEach((d,i)=>{
+const div=document.createElement('div');
+div.className='trig';
+div.innerHTML=`<div class="dot" style="background:${d.color}"></div><div class="tc"><div class="tn">${d.journey}</div><div class="tt">Trigger: ${d.trigger}</div><div class="pills">${pillNames.map((p,j)=>`<span class="pill${d.stages[j]?' on':''}">${p}</span>`).join('')}</div></div>`;
+div.onclick=()=>selectJourney(i);
+el.appendChild(div);
+});
+
+function selectJourney(i){
+sel=sel===i?-1:i;
+document.querySelectorAll('.trig').forEach((t,j)=>t.classList.toggle('sel',j===sel));
+const stages=document.querySelectorAll('.stage');
+stages.forEach(s=>{s.className='stage'});
+const overviewEl=document.getElementById('overview');
+if(sel>=0){
+const d=data[sel];
+d.stages.forEach((v,j)=>{if(v)stages[j].classList.add('active')});
+if(d.drop>=0)stages[d.drop].classList.add('drop');
+document.getElementById('meta').style.display='grid';
+document.getElementById('mBenefits').textContent=d.benefits;
+document.getElementById('mDrop').textContent=d.dropText;
+document.getElementById('mNav').textContent=d.nav;
+document.getElementById('mLink').textContent=d.link;
+document.getElementById('oTitle').textContent=d.journey;
+document.getElementById('oText').textContent=d.overview;
+overviewEl.classList.add('visible');
+}else{
+document.getElementById('meta').style.display='none';
+overviewEl.classList.remove('visible');
+}
+}
+</script>
+</body>
+</html>
